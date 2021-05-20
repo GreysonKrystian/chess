@@ -9,5 +9,5 @@ private:
 public:
 
 	Knight(int, int, int);
-	std::list<std::vector<int>> get_possible_positions(std::list<std::vector<int>> const&) const;
+	std::list<std::vector<int>> get_possible_positions();
 };

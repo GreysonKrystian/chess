@@ -1,8 +1,14 @@
-#import "Figure.h"
+#include "Figure.h"
 
-class King: public Figure
+
+class King : public Figure
 {
+private:
+	std::list<std::vector<int>> get_all_positions();
 public:
-	King(int color, int pos_x, int pos_y);
-	virtual std::list<std::vector<int>>  get_possible_positions();
-}
+	King(int, int, int);
+	virtual std::list<std::vector<int>> get_possible_positions();
+};
+
+
+

@@ -1,9 +1,12 @@
 #pragma once
-#import "Figure.h"
+#include "Figure.h"
 
-class Bishop: public Figure
+
+class Bishop : public Figure
 {
+private:
+	bool in_range(std::vector<int>);
 public:
-	Bishop(int color, int pos_x, int pos_y);
-	virtual std::list<std::vector<int>>  get_possible_positions();
-}
+	Bishop(int, int, int);
+	virtual std::list<std::vector<int>> get_possible_positions();
+};

@@ -4,7 +4,9 @@
 
 class Rook : public Figure
 {
+private:
+	bool in_range(std::vector<int>);
 public:
-	Rook(int color, int pos_x, int pos_y);
-	std::list<std::vector<int>> get_possible_positions();
+	Rook(int, int, int);
+	virtual std::list<std::vector<int>> get_possible_positions();
 };

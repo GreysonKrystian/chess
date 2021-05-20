@@ -141,6 +141,11 @@
   <ItemGroup>
     <ClCompile Include="śmietnik.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chess\Chess.vcxproj">
+      <Project>{5d6e5c15-05f3-4bb2-8fdc-19d8170ee182}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

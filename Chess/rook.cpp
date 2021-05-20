@@ -15,34 +15,34 @@ bool Rook::in_range()
 		return false;
 }
 
-Rook::get_possible_positions()
+std::list<std::vector<int>> Rook::get_possible_positions()
 {
 	std::list<std::vector<int>> all_positions = {};
 	for (int i{ 0 }; i < 8; i++)
 	{
-		std::vector<int> possible_pos = {pos_x + i, pos_y}
+		std::vector<int> possible_pos = { pos_x + i, pos_y};
 		if (in_range)
 		{
 			all_positions.push_back(possible_pos);
 		}
 		
-		std::vector<int> possible_pos = {pos_x - i, pos_y}
+		std::vector<int> possible_pos = { pos_x - i, pos_y };
 		if (in_range)
 		{
 			all_positions.push_back(possible_pos);
 		}
 		
-		std::vector<int> possible_pos = {pos_x, pos_y + i}
+		std::vector<int> possible_pos = { pos_x, pos_y + i };
 		if (in_range)
 		{
 			all_positions.push_back(possible_pos);
 		}
 
-		std::vector<int> possible_pos = {pos_x, pos_y + i}
+		std::vector<int> possible_pos = { pos_x, pos_y + i };
 		if (in_range)
 		{
 			all_positions.push_back(possible_pos);
 		}
 	}
-
+	return all_positions;
 }

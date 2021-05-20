@@ -24,9 +24,6 @@
     <ClCompile Include="king.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="bishop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -34,6 +31,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pawn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rook1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

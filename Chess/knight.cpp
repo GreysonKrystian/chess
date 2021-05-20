@@ -1,7 +1,7 @@
 #include "Knight.h"
 
 
-Knight::Knight(int my_color, int my_pos_y, int my_pos_x)
+Knight::Knight(int my_color, int my_pos_x, int my_pos_y)
 {
 	color = my_color;
 	pos_y = my_pos_y;
@@ -9,14 +9,17 @@ Knight::Knight(int my_color, int my_pos_y, int my_pos_x)
 }
 
 
-std::list<std::vector<int>> Knight::get_possible_positions(std::list<std::vector<int>> const& all_points) const
+std::list<std::vector<int>> Knight::get_possible_positions()
 {
+	std::list<std::vector<int>>	all_points = get_all_positions();
 	std::list<std::vector<int>> possible;
 
 	for (auto itr = all_points.begin(); itr != all_points.end(); ++itr)
 	{
 		bool in_range = true;
-		if ((*itr)[0] < 0 || (*itr)[0] > 7)
+		bool condition1 = ((*itr)[0] < 0 || (*itr)[0] > 8);
+		bool condition2 = ((*itr)[1] < 0 || (*itr)[1] > 8);
+		if (condition1 || condition2)
 		{
 			in_range = false;
 		}

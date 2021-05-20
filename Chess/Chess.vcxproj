@@ -157,7 +157,7 @@
     <ClCompile Include="knight.cpp" />
     <ClCompile Include="pawn.cpp" />
     <ClCompile Include="queen.cpp" />
-    <ClCompile Include="rook.cpp" />
+    <ClCompile Include="rook1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bishop.h" />
