@@ -17,8 +17,8 @@ std::list<std::vector<int>> Knight::get_possible_positions()
 	for (auto itr = all_points.begin(); itr != all_points.end(); ++itr)
 	{
 		bool in_range = true;
-		bool condition1 = ((*itr)[0] < 0 || (*itr)[0] > 8);
-		bool condition2 = ((*itr)[1] < 0 || (*itr)[1] > 8);
+		bool condition1 = ((*itr)[0] < 1 || (*itr)[0] > 8);
+		bool condition2 = ((*itr)[1] < 1 || (*itr)[1] > 8);
 		if (condition1 || condition2)
 		{
 			in_range = false;
@@ -46,7 +46,7 @@ std::list<std::vector<int>> Knight::get_all_positions()
 	std::vector<int> pos4 = { pos_x + 1, pos_y + 2 };
 	
 	std::vector<int> pos5 = { pos_x - 1, pos_y + 2 };
-	std::vector<int> pos6 = { pos_x + 2, pos_y + 1 };
+	std::vector<int> pos6 = { pos_x - 2, pos_y + 1 };
 	
 	std::vector<int> pos7 = { pos_x - 2, pos_y - 1 };
 	std::vector<int> pos8 = { pos_x - 1, pos_y - 2 };

@@ -8,5 +8,7 @@ private:
 public:
 	Pawn(int, int, int);
 	std::list<std::vector<int>> get_possible_positions();
+	std::list<std::vector<int>> get_all_positions();
 	std::list<std::vector<int>> get_strike_positions();
+	void change_first_move_status();
 };
