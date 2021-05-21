@@ -25,6 +25,7 @@ Board::~Board()
 	}
 }
 
+
 void Board::set_starting_postions()
 {	
 	Figure* bishop_l_b = new Bishop(0, 2, 0);
@@ -118,7 +119,56 @@ void Board::move_figure(Figure* my_figure, int x, int y)
 	board[pos[1]][pos[2]] = nullptr;
 }
 
-std::list<std::vector<int>> Board::get_positions_in_board(Figure*)
-{
 
+std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figure)
+{
+	std::list<std::vector<int>> possible_pos = my_figure->get_possible_positions();
+	std::list<std::vector<int>> occupied_positions;
+
+	int fig_x = (my_figure->get_position())[0];
+	int fig_y = (my_figure->get_position())[1];
+
+
+
+	for (auto itr = possible_pos.begin(); itr != possible_pos.end(); ++itr)
+	{
+		if ((board[(*itr)[0]][(*itr)[1]] != nullptr))
+		{
+			occupied_positions.push_back(*itr);
+		}
+	}
+	
+	for (auto itr = occupied_positions.begin(); itr != occupied_positions.end(); ++itr)
+	{
+		std::list<std::vector<int>> points_to_del = check_positions_behind(*itr, my_figure->get_position());
+	}
+
+
+
+
+
+	
+	
+	return std::list<std::vector<int>>();
 }
+
+
+
+
+std::list<std::vector<int>> Board::check_positions_behind(std::vector<int> , std::vector<int> )
+	if ((possible_pos[0] > starting_pos[0]) && ((possible_pos[1] > starting_pos[1]))
+	{
+		for (int i=; i<=; i+)
+	}
+	if ((possible_pos[0] < starting_pos[0]) && ((possible_pos[1] < starting_pos[1]))
+	{
+
+	}
+	if ((possible_pos[0] > starting_pos[0]) && ((possible_pos[1] < starting_pos[1]))
+	{
+		
+	}
+	if ((possible_pos[0] < starting_pos[0]) && ((possible_pos[1] > starting_pos[1]))
+	{
+
+	}
