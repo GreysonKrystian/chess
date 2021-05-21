@@ -45,9 +45,9 @@ namespace UnitTestFigures
 
 		TEST_METHOD(Knight_get_possible_positions_left_top_corner)
 		{
-			Knight kon(1, 1, 1);
-			std::vector<int> pos1 = { 3,2 };
-			std::vector<int> pos2 = { 2,3 };
+			Knight kon(1, 0, 0);
+			std::vector<int> pos1 = { 2,1 };
+			std::vector<int> pos2 = { 1,2 };
 
 			std::list<std::vector<int>> certain_positions;
 			certain_positions.push_back(pos1);
@@ -63,9 +63,9 @@ namespace UnitTestFigures
 
 		TEST_METHOD(Knight_get_possible_positions_right_top_corner)
 		{
-			Knight kon(1, 8, 1);
-			std::vector<int> pos1 = { 6,2 };
-			std::vector<int> pos2 = { 7,3 };
+			Knight kon(1, 7, 0);
+			std::vector<int> pos1 = { 5,1 };
+			std::vector<int> pos2 = { 6,2 };
 
 			std::list<std::vector<int>> certain_positions;
 			certain_positions.push_back(pos1);
@@ -81,9 +81,9 @@ namespace UnitTestFigures
 
 		TEST_METHOD(Knight_get_possible_positions_left_bottom_corner)
 		{
-			Knight kon(1, 1, 8);
-			std::vector<int> pos1 = { 2,6 };
-			std::vector<int> pos2 = { 3,7 };
+			Knight kon(1, 0, 7);
+			std::vector<int> pos1 = { 1,5 };
+			std::vector<int> pos2 = { 2,6 };
 
 			std::list<std::vector<int>> certain_positions;
 			certain_positions.push_back(pos1);
@@ -98,9 +98,9 @@ namespace UnitTestFigures
 
 		TEST_METHOD(Knight_get_possible_positions_right_bottom_corner)
 		{
-			Knight kon(1, 8, 8);
-			std::vector<int> pos1 = { 7,6 };
-			std::vector<int> pos2 = { 6,7 };
+			Knight kon(1, 7, 7);
+			std::vector<int> pos1 = { 6,5 };
+			std::vector<int> pos2 = { 5,6 };
 
 			std::list<std::vector<int>> certain_positions;
 			certain_positions.push_back(pos1);

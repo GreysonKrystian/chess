@@ -13,5 +13,5 @@ private:
 	std::array<std::array < Figure, 8>, 8> board = {};
 
 public:
-	void SetStartingPostions();
+	void set_starting_postions();
 	void      

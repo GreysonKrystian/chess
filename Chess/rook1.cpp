@@ -9,7 +9,7 @@ Rook::Rook(int my_color, int my_pos_x, int my_pos_y)
 
 bool Rook::in_range(std::vector<int> possible_pos)
 {
-	if (possible_pos[0] > 0 && possible_pos[1] > 0 && possible_pos[0] <= 8 && possible_pos[1] <= 8)
+	if (possible_pos[0] >= 0 && possible_pos[1] >= 0 && possible_pos[0] < 8 && possible_pos[1] < 8)
 		return true;
 	else
 		return false;
