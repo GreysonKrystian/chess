@@ -8,8 +8,20 @@ Knight::Knight(int my_color, int my_pos_x, int my_pos_y)
 	pos_x = my_pos_x;
 }
 
-
 std::list<std::vector<int>> Knight::get_possible_positions()
+{
+	std::list<std::vector<int>>	positions = get_positions_in_board();
+
+
+
+
+}
+
+
+
+
+
+std::list<std::vector<int>> Knight::get_positions_in_board()
 {
 	std::list<std::vector<int>>	all_points = get_all_positions();
 	std::list<std::vector<int>> possible;

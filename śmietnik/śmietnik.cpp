@@ -8,19 +8,20 @@
 #include "../Chess/Queen.h"
 #include "../Chess/Pawn.h"
 #include "../Chess/Rook.h"
+#include <string>
 
 using namespace std;
 
 int main()
 {
-	Knight goniec(1, 7, 0);
+	/*Knight goniec(1, 7, 0);
 	list<vector<int>> lista = goniec.get_possible_positions();
 	cout << "////////////// /////////////////////" << endl;
 
 	for (auto itr = lista.begin(); itr != lista.end(); ++itr)
 	{
 		cout << (*itr)[0] << " : " << (*itr)[1] << endl;
-	}
+	}*/
 
 	/*cout << "//////////////pewne/////////////////////" << endl;
 
@@ -49,14 +50,14 @@ int main()
 	}*/
 
 
-	cout << "///////////////posortowane////////////////////" << endl;
+	/*cout << "///////////////posortowane////////////////////" << endl;
 
 	lista.sort();
 
 	for (auto itr1 = lista.begin(); itr1 != lista.end(); ++itr1)
 	{
 		cout << (*itr1)[0] << " : " << (*itr1)[1] << endl;
-	}
+	}*/
 
 	/*cout << "//////////////pewne posortowane/////////////////////" << endl;
 
@@ -65,5 +66,16 @@ int main()
 	{
 		cout << (*itr)[0] << " : " << (*itr)[1] << endl;
 	}*/
+
+
+
+	std::string starting_position = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+
+	cout << starting_position[0] << endl;
+
+	std::string str("Test string");
+	for (std::string::iterator it = str.begin(); it != str.end(); ++it)
+		std::cout << *it<<endl;
+	std::cout << '\n';
 
 }

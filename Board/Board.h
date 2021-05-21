@@ -5,13 +5,16 @@
 #include "../Chess/queen.h"
 #include "../Chess/rook.h"
 #include <array>
+#include <list>
+#include <vector>
 
 class Board
 {
-
-private:
-	std::array<std::array < Figure, 8>, 8> board = {};
-
+	std::array<std::array < Figure*, 8>, 8> board;
 public:
+	Board();
+	~Board();
+	std::list<std::vector<int>> get_positions_in_board()
 	void set_starting_postions();
-	void      
+	void move_figure(Figure* my_figure, int x, int y);
+};

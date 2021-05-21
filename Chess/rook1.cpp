@@ -15,6 +15,16 @@ bool Rook::in_range(std::vector<int> possible_pos)
 		return false;
 }
 
+bool Rook::is_valid(std::vector<int> current_pos, std::vector<int> possible_pos, std::vector<Figures*> board )
+{
+	for (int i = 1; i <8; i++ )
+		
+
+
+
+}
+
+
 std::list<std::vector<int>> Rook::get_possible_positions()
 {
 	std::list<std::vector<int>> all_positions = {};
@@ -46,3 +56,4 @@ std::list<std::vector<int>> Rook::get_possible_positions()
 	}
 	return all_positions;
 }
+

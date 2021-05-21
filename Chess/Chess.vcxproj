@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="bishop.cpp" />
     <ClCompile Include="Chess.cpp" />
+    <ClCompile Include="Figure.cpp" />
     <ClCompile Include="king.cpp" />
     <ClCompile Include="knight.cpp" />
     <ClCompile Include="pawn.cpp" />
@@ -167,6 +168,11 @@
     <ClInclude Include="pawn.h" />
     <ClInclude Include="queen.h" />
     <ClInclude Include="rook.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Board\Board.vcxproj">
+      <Project>{12d3fc64-25ae-4171-9e8d-0d2050a0db1f}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

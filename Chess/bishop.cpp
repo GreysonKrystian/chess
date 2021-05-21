@@ -15,6 +15,26 @@ bool Bishop::in_range(std::vector<int> possible_pos)
 		return false;
 }
 
+//bool Bishop::is_not_blocked(std::vector<int>possible_pos, std::vector<Figures*> board, std::vector<int>starting_pos)
+//{
+//	if ((possible_pos[0] > starting_pos[0]) && ((possible_pos[1] > starting_pos[1]))
+//	{
+//		for (int i=; i<=; i+)
+//	}
+//	if ((possible_pos[0] < starting_pos[0]) && ((possible_pos[1] < starting_pos[1]))
+//	{
+//
+//	}
+//	if ((possible_pos[0] > starting_pos[0]) && ((possible_pos[1] < starting_pos[1]))
+//	{
+//		
+//	}
+//	if ((possible_pos[0] < starting_pos[0]) && ((possible_pos[1] > starting_pos[1]))
+//	{
+//
+//	}
+//}
+
 std::list<std::vector<int>> Bishop::get_possible_positions()
 {
 	std::list<std::vector<int>> all_positions = {};
@@ -43,3 +63,12 @@ std::list<std::vector<int>> Bishop::get_possible_positions()
 	}
 	return all_positions;
 }
+
+//void Bishop::remove_blocked_positions()
+//{
+//	for(std::vector::iterator iter = vector.begin(); vector.end(); ++iter)
+//		{
+//			current = *iter;
+//			
+//		}
+//}
