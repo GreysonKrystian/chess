@@ -1,6 +1,6 @@
 #include "pawn.h"
 
-Pawn::Pawn(int my_color, int my_pos_y, int my_pos_x)
+Pawn::Pawn(int my_color, int my_pos_x, int my_pos_y)
 {
 	color = my_color;
 	pos_y = my_pos_y;
@@ -9,7 +9,7 @@ Pawn::Pawn(int my_color, int my_pos_y, int my_pos_x)
 	
 }
 
-std::list<std::vector<int>> Pawn::get_possible_positions()
+std::list<std::vector<int>> Pawn::get_all_positions()
 {
 	std::list<std::vector<int>> positions;
 	
@@ -37,25 +37,71 @@ std::list<std::vector<int>> Pawn::get_possible_positions()
 	return positions;
 }
 
+
+std::list<std::vector<int>> Pawn::get_possible_positions()
+{
+	std::list<std::vector<int>>	all_points = get_all_positions();
+	std::list<std::vector<int>> possible;
+
+	for (auto itr = all_points.begin(); itr != all_points.end(); ++itr)
+	{
+		bool in_range = true;
+		bool condition1 = ((*itr)[0] < 1 || (*itr)[0] > 8);
+		bool condition2 = ((*itr)[1] < 1 || (*itr)[1] > 8);
+		if (condition1 || condition2)
+		{
+			in_range = false;
+		}
+
+		if (in_range)
+		{
+			possible.push_back(*itr);
+		}
+
+	}
+	return possible;
+}
+
+
 std::list<std::vector<int>> Pawn::get_strike_positions()
 {
 	std::list<std::vector<int>> positions;
 
 	if (color == 1) //bialy // od do³u
 	{
-		std::vector<int> pos_1 = { pos_x + 1, pos_y - 1 };
-		std::vector<int> pos_2 = { pos_x - 1 , pos_y - 1 };
-		positions.push_back(pos_1);
-		positions.push_back(pos_2);
+		
+		if (pos_x + 1 <= 8 && pos_y - 1 >= 1) //po prawo
+		{
+			std::vector<int> pos_1 = { pos_x + 1, pos_y - 1 };
+			positions.push_back(pos_1);
+		}
+
+		if (pos_x - 1 >= 1 && pos_y - 1 >= 1) //po lewo
+		{
+			std::vector<int> pos_2 = { pos_x - 1 , pos_y - 1 };
+			positions.push_back(pos_2);
+		}
 	}
 
 	if (color == 0) //czarny // od gory
 	{
-		std::vector<int> pos_1 = { pos_x + 1, pos_y + 1 };
-		std::vector<int> pos_2 = { pos_x - 1 , pos_y + 1 };
-		positions.push_back(pos_1);
-		positions.push_back(pos_2);
+		if (pos_x + 1 <= 8 && pos_y + 1 <= 8) //po prawo
+		{
+			std::vector<int> pos_1 = { pos_x + 1, pos_y + 1 };
+			positions.push_back(pos_1);
+		}
+
+		if (pos_x - 1 >= 1 && pos_y + 1 <= 8) //po lewo
+		{
+			std::vector<int> pos_2 = { pos_x - 1 , pos_y + 1 };
+			positions.push_back(pos_2);
+		}
 
 	}
 	return positions;
+}
+
+void Pawn::change_first_move_status()
+{
+	first_move = false;
 }
