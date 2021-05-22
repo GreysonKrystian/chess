@@ -7,8 +7,13 @@ void Figure::change_pos(int x, int y)
 	pos_y = y;
 }
 
-std::vector<int, int> Figure::get_position()
+std::vector<int> Figure::get_position()
 {
-	std::vector<int, int> my_vector = { pos_x, pos_y };
+	std::vector<int> my_vector = { pos_x, pos_y };
 	return my_vector;
+}
+
+int Figure::get_color()
+{
+	return color;
 }

@@ -7,11 +7,11 @@
 #include <array>
 #include <list>
 #include <vector>
-
+#include "../Chess/Figure.h"
 class Board
 {
 	std::array<std::array < Figure*, 8>, 8> board;
-	std::list<std::vector<int>> check_positions_behind(std::vector<int>, std::vector<int>);
+	std::list<std::vector<int>> get_positions_behind(std::vector<int>, std::vector<int>); //zwraca pola za zajętym polem na planszy np. dla królowej
 
 public:
 	Board();
