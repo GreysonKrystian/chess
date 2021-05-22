@@ -142,6 +142,9 @@
     <ClCompile Include="śmietnik.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Board\Board.vcxproj">
+      <Project>{12d3fc64-25ae-4171-9e8d-0d2050a0db1f}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Chess\Chess.vcxproj">
       <Project>{5d6e5c15-05f3-4bb2-8fdc-19d8170ee182}</Project>
     </ProjectReference>
