@@ -8,6 +8,8 @@
 #include "../Chess/Queen.h"
 #include "../Chess/Pawn.h"
 #include "../Chess/Rook.h"
+
+#include "../Board/Board.h"
 #include <string>
 
 using namespace std;
@@ -67,15 +69,25 @@ int main()
 		cout << (*itr)[0] << " : " << (*itr)[1] << endl;
 	}*/
 
+	Board plansza;
+	plansza.set_starting_postions();
+	plansza.move_figure(plansza.get_figure(3, 0), 3, 3);
+	std::list<std::vector<int>> positions = plansza.get_free_positions_for_figure(plansza.get_figure(3,3));
+
+	for (auto itr = positions.begin(); itr != positions.end(); ++itr)
+	{
+		cout << (*itr)[0] << " : " << (*itr)[1] << endl;
+	}
 
 
-	std::string starting_position = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
-	cout << starting_position[0] << endl;
+	//std::string starting_position = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
-	std::string str("Test string");
-	for (std::string::iterator it = str.begin(); it != str.end(); ++it)
-		std::cout << *it<<endl;
-	std::cout << '\n';
+	//cout << starting_position[0] << endl;
+
+	//std::string str("Test string");
+	//for (std::string::iterator it = str.begin(); it != str.end(); ++it)
+	//	std::cout << *it<<endl;
+	//std::cout << '\n';
 
 }

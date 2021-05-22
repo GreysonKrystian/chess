@@ -65,42 +65,42 @@ void Board::set_starting_postions()
 
 	//czarne
 	board[0][0] = rook_l_b;
-	board[0][1] = knight_l_b;
-	board[0][2] = bishop_l_b;
-	board[0][3] = queen_b;
-	board[0][4] = king_b;
-	board[0][5] = bishop_r_b;
-	board[0][6] = knight_r_b;
-	board[0][7] = rook_r_b;
+	board[1][0] = knight_l_b;
+	board[2][0] = bishop_l_b;
+	board[3][0] = queen_b;
+	board[4][0] = king_b;
+	board[5][0] = bishop_r_b;
+	board[6][0] = knight_r_b;
+	board[7][0] = rook_r_b;
 
-	board[1][1] = pawn_b_1;
-	board[2][1] = pawn_b_2;
-	board[3][1] = pawn_b_3;
-	board[4][1] = pawn_b_4;
-	board[5][1] = pawn_b_5;
-	board[6][1] = pawn_b_6;
-	board[7][1] = pawn_b_7;
+	board[0][1] = pawn_b_1;
+	board[1][1] = pawn_b_2;
+	board[2][1] = pawn_b_3;
+	board[3][1] = pawn_b_4;
+	board[4][1] = pawn_b_5;
+	board[5][1] = pawn_b_6;
+	board[6][1] = pawn_b_7;
 	board[7][1] = pawn_b_8;
 	 
 
 	//białe 
-	board[7][0] = rook_l_w;
-	board[7][1] = knight_l_w;
-	board[7][2] = bishop_l_w;
-	board[7][3] = king_w;
-	board[7][4] = queen_w;
-	board[7][5] = bishop_r_w;
-	board[7][6] = knight_r_w;
+	board[0][7] = rook_l_w;
+	board[1][7] = knight_l_w;
+	board[2][7] = bishop_l_w;
+	board[3][7] = king_w;
+	board[4][7] = queen_w;
+	board[5][7] = bishop_r_w;
+	board[6][7] = knight_r_w;
 	board[7][7] = rook_r_w;
 
-	board[1][1] = pawn_w_1;
-	board[2][1] = pawn_w_2;
-	board[3][1] = pawn_w_3;
-	board[4][1] = pawn_w_4;
-	board[5][1] = pawn_w_5;
-	board[6][1] = pawn_w_6;
-	board[7][1] = pawn_w_7;
-	board[7][1] = pawn_w_8;
+	board[0][6] = pawn_w_1;
+	board[1][6] = pawn_w_2;
+	board[2][6] = pawn_w_3;
+	board[3][6] = pawn_w_4;
+	board[4][6] = pawn_w_5;
+	board[5][6] = pawn_w_6;
+	board[6][6] = pawn_w_7;
+	board[7][6] = pawn_w_8;
 }
 
 
@@ -112,7 +112,12 @@ void Board::move_figure(Figure* my_figure, int x, int y)
 	my_figure->change_pos(x, y);
 	board[x][y] = my_figure;
 
-	board[pos[1]][pos[2]] = nullptr;
+	board[pos[0]][pos[1]] = nullptr;
+}
+
+Figure* Board::get_figure(int x, int y)
+{
+	return board[x][y];
 }
 
 
@@ -134,7 +139,7 @@ std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figu
 	
 	for (auto itr = occupied_positions.begin(); itr != occupied_positions.end(); ++itr)
 	{
-		std::list<std::vector<int>> points_to_del = get_positions_behind(*itr, my_figure->get_position());
+		std::list<std::vector<int>> points_to_del = get_positions_behind(my_figure->get_position(), *itr);
 		
 		int blc_x = (*itr)[0];
 		int blc_y = (*itr)[1];
@@ -145,7 +150,7 @@ std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figu
 
 		for (auto itr_del = points_to_del.begin(); itr_del != points_to_del.end(); ++itr_del)
 		{
-			for (auto itr_pos = possible_pos.begin(); itr_del != possible_pos.end(); ++itr_del)
+			for (auto itr_pos = possible_pos.begin(); itr_pos != possible_pos.end(); ++itr_pos)
 			{
 				if (*itr_pos == *itr_del)
 				{
