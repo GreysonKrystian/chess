@@ -16,6 +16,7 @@ class Board
 public:
 	Board();
 	~Board();
+	Figure* get_position_info(int x, int y); // informacje o figurze na danym polu
 	std::list<std::vector<int>> get_free_positions_for_figure(Figure*);
 	void set_starting_postions();
 	void move_figure(Figure* my_figure, int x, int y);

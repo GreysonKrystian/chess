@@ -103,12 +103,20 @@ void Board::set_starting_postions()
 	board[7][1] = pawn_w_8;
 }
 
-
+Figure* Board::get_position_info(int x, int y)
+{
+	return board[x][y];
+}
 
 void Board::move_figure(Figure* my_figure, int x, int y)
 {
 	std::vector<int> pos = my_figure->get_position();
-
+	//if (my_figure->get_type() == "K" )
+	//{
+	// zrob roszade
+	//}
+	if (my_figure->get_first_move() == true)
+		my_figure->change_first_move_status();
 	my_figure->change_pos(x, y);
 	board[x][y] = my_figure;
 
@@ -267,22 +275,5 @@ std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> current
 			blc_y++;
 		}
 	}
-	return positions_behind;
-
-	/*if ((possible_pos[0] > starting_pos[0]) && (possible_pos[1] > starting_pos[1]))
-	{
-		for (int i = ; i <= ; i + )
-	}
-	if ((possible_pos[0] < starting_pos[0]) && ((possible_pos[1] < starting_pos[1]))
-	{
-
-	}
-	if ((possible_pos[0] > starting_pos[0]) && ((possible_pos[1] < starting_pos[1]))
-	{
-
-	}
-	if ((possible_pos[0] < starting_pos[0]) && ((possible_pos[1] > starting_pos[1]))
-	{
-
-	}*/
+	return positions_behind; 
 }

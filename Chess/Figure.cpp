@@ -17,3 +17,18 @@ int Figure::get_color()
 {
 	return color;
 }
+
+std::string Figure::get_type()
+{
+	return type;
+}
+
+void Figure::change_first_move_status()
+{
+	first_move = false;
+}
+
+bool Figure::get_first_move()
+{
+	return first_move;
+}
