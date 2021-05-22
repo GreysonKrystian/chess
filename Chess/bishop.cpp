@@ -15,10 +15,6 @@ bool Bishop::in_range(std::vector<int> possible_pos)
 		return false;
 }
 
-bool Bishop::is_not_blocked(std::vector<int>possible_pos, std::vector<Figures*> board, std::vector<int>starting_pos)
-{
-}
-
 std::list<std::vector<int>> Bishop::get_possible_positions()
 {
 	std::list<std::vector<int>> all_positions = {};
