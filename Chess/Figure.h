@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
 #include <vector>
-//#include "../Board/board.h"
+
 
 class Figure
 {

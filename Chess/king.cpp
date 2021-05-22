@@ -1,3 +1,4 @@
+
 #include "king.h"
 
 King::King(int my_color, int my_pos_x, int my_pos_y)
