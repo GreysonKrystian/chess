@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5d6e5c15-05f3-4bb2-8fdc-19d8170ee182}</ProjectGuid>
-    <RootNamespace>Chess</RootNamespace>
+    <ProjectGuid>{107f812d-9d56-4e16-94ff-2a67fb960956}</ProjectGuid>
+    <RootNamespace>GameEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,27 +151,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bishop.cpp" />
-    <ClCompile Include="Chess.cpp" />
-    <ClCompile Include="Figure.cpp" />
-    <ClCompile Include="king.cpp" />
-    <ClCompile Include="knight.cpp" />
-    <ClCompile Include="pawn.cpp" />
-    <ClCompile Include="queen.cpp" />
-    <ClCompile Include="rook.cpp" />
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bishop.h" />
-    <ClInclude Include="Figure.h" />
-    <ClInclude Include="king.h" />
-    <ClInclude Include="knight.h" />
-    <ClInclude Include="pawn.h" />
-    <ClInclude Include="queen.h" />
-    <ClInclude Include="rook.h" />
+    <ClCompile Include="Game.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Board\Board.vcxproj">
       <Project>{12d3fc64-25ae-4171-9e8d-0d2050a0db1f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Chess\Chess.vcxproj">
+      <Project>{5d6e5c15-05f3-4bb2-8fdc-19d8170ee182}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -6,6 +6,7 @@ Knight::Knight(int my_color, int my_pos_x, int my_pos_y)
 	color = my_color;
 	pos_y = my_pos_y;
 	pos_x = my_pos_x;
+	type = "N";
 }
 
 std::list<std::vector<int>> Knight::get_possible_positions()

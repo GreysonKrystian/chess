@@ -103,12 +103,17 @@ void Board::set_starting_postions()
 	board[7][6] = pawn_w_8;
 }
 
-
-
 void Board::move_figure(Figure* my_figure, int x, int y)
 {
 	std::vector<int> pos = my_figure->get_position();
-
+	//if (my_figure->get_type() == "K" )
+	//{
+	// zrob roszade
+	//}
+	if (my_figure->get_first_move() == true)
+	{
+		my_figure->change_first_move_status();
+	}
 	my_figure->change_pos(x, y);
 	board[x][y] = my_figure;
 
@@ -124,7 +129,7 @@ Figure* Board::get_figure(int x, int y)
 std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figure)
 {
 	std::list<std::vector<int>> possible_pos = my_figure->get_possible_positions();
-	std::list<std::vector<int>> occupied_positions; // pozycje na które może się przemieścić figura, ale to pole jest zajęte przez inną
+	std::list<std::vector<int>> occupied_positions; // pozycje na które może się przemieścić figura, ale to pole jest zajęte przez inną nieważne jakiego koloru
 
 	int fig_x = (my_figure->get_position())[0];
 	int fig_y = (my_figure->get_position())[1];
@@ -137,30 +142,74 @@ std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figu
 		}
 	}
 	
-	for (auto itr = occupied_positions.begin(); itr != occupied_positions.end(); ++itr)
+	for (auto itr_ocp = occupied_positions.begin(); itr_ocp != occupied_positions.end(); ++itr_ocp)
 	{
-		std::list<std::vector<int>> points_to_del = get_positions_behind(my_figure->get_position(), *itr);
+		std::list<std::vector<int>> points_to_del;
+		if (my_figure->get_type() == "R" || my_figure->get_type() == "Q" || my_figure->get_type() == "B") // jesli królowa, goniec lub wieża dodaje pozycje do usunięcia za zablokowanym polem
+		{
+			std::list<std::vector<int>> points_behind = get_positions_behind(my_figure->get_position(), *itr_ocp);
+			points_to_del.insert(points_to_del.end(), points_behind.begin(), points_behind.end());
+		}
 		
-		int blc_x = (*itr)[0];
-		int blc_y = (*itr)[1];
+		int blc_x = (*itr_ocp)[0];
+		int blc_y = (*itr_ocp)[1];
 		if (my_figure->get_color() == (board[blc_x][blc_y])->get_color())
 		{
-			points_to_del.push_back(*itr);
+			points_to_del.push_back(*itr_ocp);
 		}
 
 		for (auto itr_del = points_to_del.begin(); itr_del != points_to_del.end(); ++itr_del)
 		{
-			for (auto itr_pos = possible_pos.begin(); itr_pos != possible_pos.end(); ++itr_pos)
-			{
-				if (*itr_pos == *itr_del)
-				{
-					possible_pos.erase(itr_pos);
-					break;
-				}
-			}
+			auto itr_pos = std::find(possible_pos.begin(), possible_pos.end(), *itr_del);
+			possible_pos.erase(itr_pos);
+			break;
 		}
 	}
 	return possible_pos;
+
+
+	
+	//std::list<std::vector<int>> possible_pos = my_figure->get_possible_positions();
+	//std::list<std::vector<int>> occupied_positions; // pozycje na które może się przemieścić figura, ale to pole jest zajęte przez inną nieważne jakiego koloru
+
+	//int fig_x = (my_figure->get_position())[0];
+	//int fig_y = (my_figure->get_position())[1];
+
+	//for (auto itr = possible_pos.begin(); itr != possible_pos.end(); ++itr)
+	//{
+	//	if ((board[(*itr)[0]][(*itr)[1]] != nullptr))
+	//	{
+	//		occupied_positions.push_back(*itr);
+	//	}
+	//}
+
+	//for (auto itr = occupied_positions.begin(); itr != occupied_positions.end(); ++itr)
+	//{
+	//	std::list<std::vector<int>> points_to_del = get_positions_behind(my_figure->get_position(), *itr);
+
+	//	int blc_x = (*itr)[0];
+	//	int blc_y = (*itr)[1];
+
+	//	if (my_figure->get_color() == (board[blc_x][blc_y])->get_color())
+	//	{
+	//		points_to_del.push_back(*itr);
+	//	}
+
+
+
+	//	for (auto itr_del = points_to_del.begin(); itr_del != points_to_del.end(); ++itr_del)
+	//	{
+	//		for (auto itr_pos = possible_pos.begin(); itr_pos != possible_pos.end(); ++itr_pos)
+	//		{
+	//			if (*itr_pos == *itr_del)
+	//			{
+	//				possible_pos.erase(itr_pos);
+	//				break;
+	//			}
+	//		}
+	//	}
+	//}
+	//return possible_pos;
 }
 
 
@@ -272,22 +321,5 @@ std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> current
 			blc_y++;
 		}
 	}
-	return positions_behind;
-
-	/*if ((possible_pos[0] > starting_pos[0]) && (possible_pos[1] > starting_pos[1]))
-	{
-		for (int i = ; i <= ; i + )
-	}
-	if ((possible_pos[0] < starting_pos[0]) && ((possible_pos[1] < starting_pos[1]))
-	{
-
-	}
-	if ((possible_pos[0] > starting_pos[0]) && ((possible_pos[1] < starting_pos[1]))
-	{
-
-	}
-	if ((possible_pos[0] < starting_pos[0]) && ((possible_pos[1] > starting_pos[1]))
-	{
-
-	}*/
+	return positions_behind; 
 }

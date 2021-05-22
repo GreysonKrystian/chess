@@ -33,7 +33,7 @@
     <ClCompile Include="pawn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rook1.cpp">
+    <ClCompile Include="rook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Figure.cpp">

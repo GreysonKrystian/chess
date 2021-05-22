@@ -5,8 +5,8 @@ Pawn::Pawn(int my_color, int my_pos_x, int my_pos_y)
 	color = my_color;
 	pos_y = my_pos_y;
 	pos_x = my_pos_x;
-	first_move = true;
-	
+	//first_move = true;
+	type = "P";
 }
 
 std::list<std::vector<int>> Pawn::get_all_positions()
@@ -101,7 +101,7 @@ std::list<std::vector<int>> Pawn::get_strike_positions()
 	return positions;
 }
 
-void Pawn::change_first_move_status()
-{
-	first_move = false;
-}
+//void Pawn::change_first_move_status()
+//{
+//	first_move = false;
+//}

@@ -5,6 +5,7 @@ Bishop::Bishop(int my_color, int my_pos_x, int my_pos_y)
 	color = my_color;
 	pos_x = my_pos_x;
 	pos_y = my_pos_y;
+	type = "B";
 }
 
 bool Bishop::in_range(std::vector<int> possible_pos)

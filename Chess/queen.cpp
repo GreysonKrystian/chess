@@ -5,6 +5,7 @@ Queen::Queen(int my_color, int my_pos_x, int my_pos_y)
 	color = my_color;
 	pos_y = my_pos_y;
 	pos_x = my_pos_x;
+	type = "Q";
 }
 
 bool Queen::in_range(std::vector<int> possible_pos)
