@@ -68,16 +68,28 @@ int main()
 	{
 		cout << (*itr)[0] << " : " << (*itr)[1] << endl;
 	}*/
+	
 
-	Board plansza;
-	plansza.set_starting_postions();
-	plansza.move_figure(plansza.get_figure(3, 0), 3, 3);
-	std::list<std::vector<int>> positions = plansza.get_free_positions_for_figure(plansza.get_figure(3,3));
+	Figure* queen_b = new Queen(0, 3, 0);
+	Figure* pawn_b_1 = new Pawn(0, 0, 1);
 
-	for (auto itr = positions.begin(); itr != positions.end(); ++itr)
-	{
-		cout << (*itr)[0] << " : " << (*itr)[1] << endl;
-	}
+	list<Figure*> list;
+	list.push_back(queen_b);
+	list.push_back(pawn_b_1);
+
+	delete queen_b;
+
+
+
+	//Board plansza;
+	//plansza.set_starting_postions();
+	//plansza.move_figure(plansza.get_figure(3, 0), 3, 3);
+	//std::list<std::vector<int>> positions = plansza.get_free_positions_for_figure(plansza.get_figure(3,3));
+
+	//for (auto itr = positions.begin(); itr != positions.end(); ++itr)
+	//{
+	//	cout << (*itr)[0] << " : " << (*itr)[1] << endl;
+	//}
 
 
 

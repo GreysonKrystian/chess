@@ -20,7 +20,7 @@ public:
 	Board();
 	~Board();
 	std::list<std::vector<int>> get_free_positions_for_figure(Figure*);
-	void set_starting_postions();
+	void set_starting_postions(std::list<Figure*>);
 	void move_figure(Figure* my_figure, int x, int y);
 	Figure* get_figure(int, int);
 };
