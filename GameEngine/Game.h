@@ -24,6 +24,7 @@ private:
 	std::list<std::vector<int>> get_castling_positions();
 	bool castling_right_conditions(int pos_x, int pos_y);
 	std::list<Figure*> get_checking_figures(Player current_player);
+	
 
 public:
 	Game();
@@ -32,5 +33,5 @@ public:
 	void change_turn();
 	void create_figures();
 	bool get_current_player(); // sprawdz ktory kolor ma ruch bialy = true, czarny false
-
+	std::list<std::vector<int>> get_allowed_moves(Player);
 };

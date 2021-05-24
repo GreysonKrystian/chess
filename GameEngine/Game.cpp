@@ -37,11 +37,120 @@ std::list<Figure*> Game::get_checking_figures(Player current_player)
 	return checking_figures;
 }
 
-std::list<std::vector<int>> Game::get_allowed_moves(std::list<Figure*> checking_figures)
+std::list<std::vector<int>> Game::get_allowed_moves(Player current_player) //zwraca możliwe ruchy dla szachowanego gracza
 {
-	
+	std::list<std::vector<int>> allowed_positions;
+
+	std::list<Figure*> checking_figures = get_checking_figures(current_player);
+
+	auto itr_checking_figure = checking_figures.begin();
+	std::vector<int> checking_pos = (*itr_checking_figure)->get_position();
+
+	int checking_x = checking_pos[0];
+	int checking_y = checking_pos[1];
+
+	std::vector<int> king_pos = (current_player.get_king())->get_position();
+	int king_x = king_pos[0];
+	int king_y = king_pos[1];
+
+	if ((king_x == checking_x) && (checking_y > king_y)) //pion w górę
+	{
+		king_y--;
+		while (king_y > checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			allowed_positions.push_back(point);
+			king_y--;
+		}
+	}
+
+	if ((king_x == checking_x) && (checking_y < king_y)) //pion w dół
+	{
+		king_y++;
+		while (king_y < checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			allowed_positions.push_back(point);
+			king_y++;
+		}
+	}
 
 
+	if ((checking_x > king_x) && (checking_y == king_y)) //poziom w prawo
+	{
+		king_x++;
+		while (king_x < checking_x)
+		{
+			std::vector<int> point = { king_x, king_y };
+			allowed_positions.push_back(point);
+			king_x++;
+		}
+	}
+
+	if ((checking_x < king_x) && (checking_y == king_y)) //poziom w lewo
+	{
+		king_x--;
+		while (king_x > checking_x)
+		{
+			std::vector<int> point = { king_x, king_y };
+			allowed_positions.push_back(point);
+			king_x--;
+		}
+	}
+
+	if ((checking_x > king_x) && (checking_y < king_y)) // prawy ukos w górę
+	{
+		king_x++;
+		king_y--;
+		while (king_x < checking_x && king_y > checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			allowed_positions.push_back(point);
+			king_x++;
+			king_y--;
+		}
+	}
+
+	if ((checking_x > king_x) && (checking_y > king_y)) // prawy ukos w dół
+	{
+		king_x++;
+		king_y++;
+		while (king_x < checking_x && king_y < checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			allowed_positions.push_back(point);
+			king_x++;
+			king_y++;
+		}
+	}
+
+	if ((checking_x < king_x) && (checking_y < king_y)) // lewy ukos w górę
+	{
+		king_x--;
+		king_y--;
+		while (king_x > checking_x && king_y > checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			allowed_positions.push_back(point);
+			king_x--;
+			king_y--;
+		}
+	}
+
+	if ((checking_x < king_x) && (checking_y > king_y)) // lewy ukos w dół
+	{
+		king_x--;
+		king_y++;
+		while (king_x > checking_x && king_y < checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			allowed_positions.push_back(point);
+			king_x--;
+			king_y++;
+		}
+	}
+
+	return allowed_positions;
 }
 
 
@@ -61,6 +170,7 @@ std::list<std::vector<int>> Game::restrict_king_positions(Player current_player)
 			king_free_positions.erase(itr_del);
 		}
 	}
+	return king_free_positions;
 }
 
 
