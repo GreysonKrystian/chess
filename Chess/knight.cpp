@@ -9,7 +9,7 @@ Knight::Knight(int my_color, int my_pos_x, int my_pos_y)
 	type = "N";
 }
 
-std::list<std::vector<int>> Knight::get_possible_positions()
+std::list<std::vector<int>> Knight::get_possible_positions() const
 {
 	std::list<std::vector<int>>	all_points = get_all_positions();
 	std::list<std::vector<int>> possible;
@@ -34,7 +34,7 @@ std::list<std::vector<int>> Knight::get_possible_positions()
 }
 
 
-std::list<std::vector<int>> Knight::get_all_positions()
+std::list<std::vector<int>> Knight::get_all_positions() const
 {
 		
 	std::list<std::vector<int>> positions;

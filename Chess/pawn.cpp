@@ -9,7 +9,7 @@ Pawn::Pawn(int my_color, int my_pos_x, int my_pos_y)
 	type = "P";
 }
 
-std::list<std::vector<int>> Pawn::get_all_positions()
+std::list<std::vector<int>> Pawn::get_all_positions() const
 {
 	std::list<std::vector<int>> positions;
 	
@@ -38,7 +38,7 @@ std::list<std::vector<int>> Pawn::get_all_positions()
 }
 
 
-std::list<std::vector<int>> Pawn::get_possible_positions()
+std::list<std::vector<int>> Pawn::get_possible_positions() const
 {
 	std::list<std::vector<int>>	all_points = get_all_positions();
 	std::list<std::vector<int>> possible;
@@ -63,7 +63,7 @@ std::list<std::vector<int>> Pawn::get_possible_positions()
 }
 
 
-std::list<std::vector<int>> Pawn::get_strike_positions()
+std::list<std::vector<int>> Pawn::get_strike_positions() const
 {
 	std::list<std::vector<int>> positions;
 

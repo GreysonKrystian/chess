@@ -6,19 +6,23 @@ Game::Game()
 	is_white_turn = true;
 }
 
-
 void Game::capture_figure(int x, int y)
 {
  	Figure* captured = board.get_figure(x, y);
 	delete captured;
 }
 
-bool Game::check_win_condition()
+bool Game::check_win_condition(Player const& current_player, Player const& checked_player) const
 {
-	return true;
+	auto king_positions = restrict_king_positions(current_player, checked_player);
+	if ((get_allowed_moves(current_player).size() == 0) && (king_positions.size() == 0))
+	{
+		return true;
+	}
+	return false;
 }
 
-std::list<Figure*> Game::get_checking_figures(Player current_player)
+std::list<Figure*> Game::get_checking_figures(Player const& current_player) const
 {
 	std::list<Figure*> checking_figures;
 
@@ -37,7 +41,7 @@ std::list<Figure*> Game::get_checking_figures(Player current_player)
 	return checking_figures;
 }
 
-std::list<std::vector<int>> Game::get_allowed_moves(Player current_player) //zwraca możliwe ruchy dla szachowanego gracza
+std::list<std::vector<int>> Game::get_allowed_moves(Player const& current_player) const //zwraca możliwe ruchy dla szachowanego gracza
 {
 	std::list<std::vector<int>> allowed_positions;
 
@@ -154,16 +158,28 @@ std::list<std::vector<int>> Game::get_allowed_moves(Player current_player) //zwr
 }
 
 
-std::list<std::vector<int>> Game::restrict_king_positions(Player current_player) //zrwaca listę pól na które może ruszyć się król, ze względu na przeciwne figury
+std::list<std::vector<int>> Game::restrict_king_positions(Player const& current_player, Player const& checked_player) const //zrwaca listę pól na które może ruszyć się król, ze względu na przeciwne figury // przyjmuje grasza szachującego
 {
-	Figure* king = current_player.get_king();
+	Figure* king = checked_player.get_king();
 	std::list<std::vector<int>> king_free_positions = board.get_free_positions_for_figure(king);
-	std::list<Figure*> current_figures = current_player.get_player_figures();
 	
-	for (auto itr = current_figures.begin(); itr != current_figures.end(); ++itr)
+	//std::list<Figure*> enemy_figures = checked_player.get_player_figures();
+	
+	//for (auto itr = enemy_figures.begin(); itr != enemy_figures.end(); ++itr)
+	//{
+	//	std::list<std::vector<int>> attacking_positions = (*itr)->get_possible_positions();
+	//	for (auto itr_attack = attacking_positions.begin(); itr_attack != attacking_positions.end(); ++itr_attack)
+	//	{
+	//		auto itr_del = std::find(king_free_positions.begin(), king_free_positions.end(), *itr_attack);
+	//		king_free_positions.erase(itr_del);
+	//	}
+	//}
+	auto checking_figures = get_checking_figures(current_player);
+	auto temp_board = board.get_board();
+	temp_board[king->get_position()[0]][king->get_position()[1]] = nullptr;
+	for (auto itr = checking_figures.begin(); itr != checking_figures.end(); ++itr)
 	{
 		std::list<std::vector<int>> attacking_positions = (*itr)->get_possible_positions();
-			
 		for (auto itr_attack = attacking_positions.begin(); itr_attack != attacking_positions.end(); ++itr_attack)
 		{
 			auto itr_del = std::find(king_free_positions.begin(), king_free_positions.end(), *itr_attack);
@@ -225,7 +241,7 @@ void Game::create_figures()
 
 
 
-bool Game::castling_left_conditions(int pos_x, int pos_y)
+bool Game::castling_left_conditions(int pos_x, int pos_y) const
 {
 
 
@@ -241,7 +257,7 @@ bool Game::castling_left_conditions(int pos_x, int pos_y)
 	}
 }
 
-bool Game::castling_right_conditions(int pos_x, int pos_y)
+bool Game::castling_right_conditions(int pos_x, int pos_y) const
 {
 	if (board.get_figure(pos_x + 3, pos_y) == nullptr)
 		return false;
@@ -254,7 +270,7 @@ bool Game::castling_right_conditions(int pos_x, int pos_y)
 	}
 }
 
-std::list<std::vector<int>> Game::get_castling_positions()
+std::list<std::vector<int>> Game::get_castling_positions() const
 {
 	int pos_x = 4;
 	int pos_y = 0;
@@ -278,7 +294,7 @@ std::list<std::vector<int>> Game::get_castling_positions()
 	return castling_positions;
 }
 
-bool Game::get_current_player()
+bool Game::get_current_player() const
 {
 	return is_white_turn;
 }
@@ -295,20 +311,23 @@ void Game::change_turn()
 	}
 }
 
+void Game::build_game()
+{
 
+}
 ///////////////////////////////////////// PLAYER /////////////////////////////////////////////
 
-void Player::set_player_figures(std::list<Figure*> figures_list)
+void Player::set_player_figures(std::list<Figure*> const& figures_list)
 {
 	player_figures = figures_list;
 }
 
-std::list<Figure*> Player::get_player_figures()
+std::list<Figure*> Player::get_player_figures() const
 {
 	return player_figures;
 }
 
-Figure* Player::get_king()
+Figure* Player::get_king() const
 {
 	for (auto itr = player_figures.begin(); itr != player_figures.end(); itr++)
 	{

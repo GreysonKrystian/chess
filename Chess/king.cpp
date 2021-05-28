@@ -9,7 +9,7 @@ King::King(int my_color, int my_pos_x, int my_pos_y)
 	type = "K";
 }
 
-std::list<std::vector<int>> King::get_possible_positions()
+std::list<std::vector<int>> King::get_possible_positions() const
 {
 	std::list<std::vector<int>>	all_points = get_all_positions();
 	std::list<std::vector<int>> possible;
@@ -34,7 +34,7 @@ std::list<std::vector<int>> King::get_possible_positions()
 }
 
 
-std::list<std::vector<int>> King::get_all_positions()
+std::list<std::vector<int>> King::get_all_positions() const
 {
 	std::list<std::vector<int>> all_positions = {};
 	all_positions.push_back({ pos_x + 1, pos_y});

@@ -13,11 +13,11 @@ protected:
 	std::string type; // nazwa figury
 	bool first_move = true; // czy pierwsza figura siê ruszy³a 
 public:
-	virtual std::list<std::vector<int>> get_possible_positions() = 0;
+	virtual std::list<std::vector<int>> get_possible_positions() const = 0;
 	void change_pos(int x, int y);
-	std::vector<int> get_position();
-	int get_color();
-	std::string get_type();
+	std::vector<int> get_position() const;
+	int get_color() const;
+	std::string get_type() const;
 	void change_first_move_status();
-	bool get_first_move();
+	bool get_first_move() const;
 };

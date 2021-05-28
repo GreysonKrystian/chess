@@ -70,15 +70,14 @@ int main()
 	}*/
 	
 
-	Figure* queen_b = new Queen(0, 3, 0);
-	Figure* pawn_b_1 = new Pawn(0, 0, 1);
+	//Figure* queen_b = new Queen(0, 3, 0);
+	//Figure* pawn_b_1 = new Pawn(0, 0, 1);
 
-	list<Figure*> list;
-	list.push_back(queen_b);
-	list.push_back(pawn_b_1);
+	//list<Figure*> list;
+	//list.push_back(queen_b);
+	//list.push_back(pawn_b_1);
 
-	delete queen_b;
-
+	//delete queen_b;
 
 
 	//Board plansza;

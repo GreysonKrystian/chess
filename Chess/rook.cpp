@@ -8,7 +8,7 @@ Rook::Rook(int my_color, int my_pos_x, int my_pos_y)
 	type = "R";
 }
 
-bool Rook::in_range(std::vector<int> possible_pos)
+bool Rook::in_range(std::vector<int> const& possible_pos) const
 {
 	if (possible_pos[0] >= 0 && possible_pos[1] >= 0 && possible_pos[0] < 8 && possible_pos[1] < 8)
 		return true;
@@ -18,7 +18,7 @@ bool Rook::in_range(std::vector<int> possible_pos)
 
 
 
-std::list<std::vector<int>> Rook::get_possible_positions()
+std::list<std::vector<int>> Rook::get_possible_positions() const
 {
 	std::list<std::vector<int>> all_positions = {};
 	for (int i = 1; i <= 8; i++)

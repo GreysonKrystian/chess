@@ -25,8 +25,12 @@ Board::~Board()
 	}
 }
 
+std::array<std::array < Figure*, 8>, 8> Board::get_board() const
+{
+	return board;
+}
 
-void Board::set_starting_postions(std::list < Figure*> figure_list)
+void Board::set_starting_postions(std::list < Figure*> const& figure_list)
 {
 	for (auto itr = figure_list.begin(); itr != figure_list.end(); ++itr)
 	{
@@ -53,13 +57,13 @@ void Board::move_figure(Figure* my_figure, int x, int y)
 	board[pos[0]][pos[1]] = nullptr;
 }
 
-Figure* Board::get_figure(int x, int y)
+Figure* Board::get_figure(int x, int y) const
 {
 	return board[x][y];
 }
 
 
-std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figure)
+std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figure) const
 {
 	std::list<std::vector<int>> possible_pos = my_figure->get_possible_positions();
 	std::list<std::vector<int>> occupied_positions; // pozycje na które może się przemieścić figura, ale to pole jest zajęte przez inną nieważne jakiego koloru
@@ -104,7 +108,7 @@ std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figu
 
 
 
-std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> current_fig_pos, std::vector<int> blocking_fig_pos)
+std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> const& current_fig_pos, std::vector<int> const& blocking_fig_pos) const
 {
 	int cur_x = current_fig_pos[0];
 	int cur_y = current_fig_pos[1];
