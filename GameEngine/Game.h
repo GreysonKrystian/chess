@@ -28,11 +28,13 @@ private:
 
 public:
 	Game();
+	~Game();
 	void capture_figure(int x, int y);
 	bool check_win_condition(Player const& current_player, Player const& checked_player) const;
 	void change_turn();
 	void build_game();
 	void create_figures();
+	Board get_board();
 	bool get_current_player() const; // sprawdz ktory kolor ma ruch bialy = true, czarny false
 	std::list<std::vector<int>> get_allowed_moves(Player const&) const; //zwraca możliwe ruchy dla szachowanego gracza
 };

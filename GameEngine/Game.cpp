@@ -4,6 +4,19 @@
 Game::Game()
 {
 	is_white_turn = true;
+	board = Board();
+	this->create_figures();
+
+}
+
+Game::~Game()
+{
+
+}
+
+Board Game::get_board()
+{
+	return board;
 }
 
 void Game::capture_figure(int x, int y)
