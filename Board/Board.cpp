@@ -42,7 +42,7 @@ void Board::set_starting_postions(std::list < Figure*> const& figure_list)
 
 void Board::move_figure(Figure* my_figure, int x, int y)
 {
-	std::vector<int> pos = my_figure->get_position();
+	std::vector<int> old_pos = my_figure->get_position();
 	//if (my_figure->get_type() == "K" )
 	//{
 	// zrob roszade
@@ -54,7 +54,7 @@ void Board::move_figure(Figure* my_figure, int x, int y)
 	my_figure->change_pos(x, y);
 	board[x][y] = my_figure;
 
-	board[pos[0]][pos[1]] = nullptr;
+	board[old_pos[0]][old_pos[1]] = nullptr;
 }
 
 Figure* Board::get_figure(int x, int y) const
@@ -82,15 +82,16 @@ std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figu
 	for (auto itr_ocp = occupied_positions.begin(); itr_ocp != occupied_positions.end(); ++itr_ocp)
 	{
 		std::list<std::vector<int>> points_to_del;
-		if (my_figure->get_type() == "R" || my_figure->get_type() == "Q" || my_figure->get_type() == "B") // jesli królowa, goniec lub wieża dodaje pozycje do usunięcia za zablokowanym polem
+		if (my_figure->get_type() == "R" || my_figure->get_type() == "Q" || my_figure->get_type() == "B" || my_figure->get_type() == "P") // jesli królowa, goniec lub wieża dodaje pozycje do usunięcia za zablokowanym polem
 		{
 			std::list<std::vector<int>> points_behind = get_positions_behind(my_figure->get_position(), *itr_ocp);
+			
 			points_to_del.insert(points_to_del.end(), points_behind.begin(), points_behind.end());
 		}
 		
 		int blc_x = (*itr_ocp)[0];
 		int blc_y = (*itr_ocp)[1];
-		if (my_figure->get_color() == (board[blc_x][blc_y])->get_color())
+		if (my_figure->get_color() == (board[blc_x][blc_y])->get_color() || my_figure->get_type() == "P")
 		{
 			points_to_del.push_back(*itr_ocp);
 		}
@@ -98,11 +99,71 @@ std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figu
 		for (auto itr_del = points_to_del.begin(); itr_del != points_to_del.end(); ++itr_del)
 		{
 			auto itr_pos = std::find(possible_pos.begin(), possible_pos.end(), *itr_del);
-			possible_pos.erase(itr_pos);
-			break;
+			if (itr_pos != possible_pos.end())
+			{possible_pos.erase(itr_pos);}
+		}
+	}
+
+	if (my_figure->get_type() == "P") // bicie piona
+	{
+		auto strikes = this->get_strike_positions_for_pawn(my_figure);		
+		for (auto itr = strikes.begin(); itr!= strikes.end(); ++itr)
+		{
+			int x = (*itr)[0];
+			int y = (*itr)[1];
+			auto aaaa = board[x][y];
+			if (board[x][y] != nullptr)
+			{
+				if (board[x][y]->get_color() != my_figure->get_color())
+				{
+					possible_pos.push_back(*itr);
+				}
+			}
 		}
 	}
 	return possible_pos;
+}
+
+std::list<std::vector<int>> Board::get_strike_positions_for_pawn(Figure* my_pawn) const
+{
+	std::list<std::vector<int>> positions;
+	int color = my_pawn->get_color();
+	int pos_x = my_pawn->get_position()[0];
+	int pos_y = my_pawn->get_position()[1];
+
+
+	if (color == 1) //bialy // od dołu
+	{
+
+		if (pos_x + 1 <= 7 && pos_y - 1 >= 0) //po prawo
+		{
+			std::vector<int> pos_1 = { pos_x + 1, pos_y - 1 };
+			positions.push_back(pos_1);
+		}
+
+		if (pos_x - 1 >= 0 && pos_y - 1 >= 0) //po lewo
+		{
+			std::vector<int> pos_2 = { pos_x - 1 , pos_y - 1 };
+			positions.push_back(pos_2);
+		}
+	}
+
+	if (color == 0) //czarny // od gory
+	{
+		if (pos_x + 1 <= 7 && pos_y + 1 <= 7) //po prawo
+		{
+			std::vector<int> pos_1 = { pos_x + 1, pos_y + 1 };
+			positions.push_back(pos_1);
+		}
+
+		if (pos_x - 1 >= 0 && pos_y + 1 <= 7) //po lewo
+		{
+			std::vector<int> pos_2 = { pos_x - 1 , pos_y + 1 };
+			positions.push_back(pos_2);
+		}
+
+	}
+	return positions;
 }
 
 
@@ -117,7 +178,7 @@ std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> const& 
 
 	std::list<std::vector<int>> positions_behind;
 
-	if ((blc_x == cur_x) && (blc_y > cur_y)) //pion w górę
+	if ((blc_x == cur_x) && (blc_y < cur_y)) //pion w górę
 	{
 		blc_y--;
 		while (blc_y >= 0)
@@ -128,7 +189,7 @@ std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> const& 
 		}
 	}
 
-	if ((blc_x == cur_x) && (blc_y < cur_y)) //pion w dół
+	if ((blc_x == cur_x) && (blc_y > cur_y)) //pion w dół
 	{
 		blc_y++;
 		while (blc_y <= 7)

@@ -76,7 +76,7 @@ namespace PawnTest
 			Assert::IsTrue(positions == certain_positions);
 		}
 
-		TEST_METHOD(Pawn_get_strike_positions_black)
+		/*TEST_METHOD(Pawn_get_strike_positions_black)
 		{
 			Pawn pion(0, 2, 1);
 			std::vector<int> pos1 = { 1,2 };
@@ -174,6 +174,6 @@ namespace PawnTest
 			certain_positions.sort();
 
 			Assert::IsTrue(positions == certain_positions);
-		}
+		}*/
 	};
 }

@@ -63,43 +63,43 @@ std::list<std::vector<int>> Pawn::get_possible_positions() const
 }
 
 
-std::list<std::vector<int>> Pawn::get_strike_positions() const
-{
-	std::list<std::vector<int>> positions;
-
-	if (color == 1) //bialy // od do³u
-	{
-		
-		if (pos_x + 1 <= 7 && pos_y - 1 >= 0) //po prawo
-		{
-			std::vector<int> pos_1 = { pos_x + 1, pos_y - 1 };
-			positions.push_back(pos_1);
-		}
-
-		if (pos_x - 1 >= 0 && pos_y - 1 >= 0) //po lewo
-		{
-			std::vector<int> pos_2 = { pos_x - 1 , pos_y - 1 };
-			positions.push_back(pos_2);
-		}
-	}
-
-	if (color == 0) //czarny // od gory
-	{
-		if (pos_x + 1 <= 7 && pos_y + 1 <= 7) //po prawo
-		{
-			std::vector<int> pos_1 = { pos_x + 1, pos_y + 1 };
-			positions.push_back(pos_1);
-		}
-
-		if (pos_x - 1 >= 0 && pos_y + 1 <= 7) //po lewo
-		{
-			std::vector<int> pos_2 = { pos_x - 1 , pos_y + 1 };
-			positions.push_back(pos_2);
-		}
-
-	}
-	return positions;
-}
+//std::list<std::vector<int>> Pawn::get_strike_positions() const
+//{
+//	std::list<std::vector<int>> positions;
+//
+//	if (color == 1) //bialy // od do³u
+//	{
+//		
+//		if (pos_x + 1 <= 7 && pos_y - 1 >= 0) //po prawo
+//		{
+//			std::vector<int> pos_1 = { pos_x + 1, pos_y - 1 };
+//			positions.push_back(pos_1);
+//		}
+//
+//		if (pos_x - 1 >= 0 && pos_y - 1 >= 0) //po lewo
+//		{
+//			std::vector<int> pos_2 = { pos_x - 1 , pos_y - 1 };
+//			positions.push_back(pos_2);
+//		}
+//	}
+//
+//	if (color == 0) //czarny // od gory
+//	{
+//		if (pos_x + 1 <= 7 && pos_y + 1 <= 7) //po prawo
+//		{
+//			std::vector<int> pos_1 = { pos_x + 1, pos_y + 1 };
+//			positions.push_back(pos_1);
+//		}
+//
+//		if (pos_x - 1 >= 0 && pos_y + 1 <= 7) //po lewo
+//		{
+//			std::vector<int> pos_2 = { pos_x - 1 , pos_y + 1 };
+//			positions.push_back(pos_2);
+//		}
+//
+//	}
+//	return positions;
+//}
 
 //void Pawn::change_first_move_status()
 //{
