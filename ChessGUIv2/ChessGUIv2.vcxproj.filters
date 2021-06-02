@@ -23,16 +23,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="ChessGUI.qrc">
+    <QtRcc Include="ChessGUIv2.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtUic Include="ChessGUI.ui">
+    <QtUic Include="ChessGUIv2.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="ChessGUI.h">
+    <QtMoc Include="ChessGUIv2.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClCompile Include="ChessGUI.cpp">
+    <ClCompile Include="ChessGUIv2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -40,10 +40,5 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GraphicsView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

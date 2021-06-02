@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0BA3584F-7E52-45CA-AD34-0F0ADD028FAD}</ProjectGuid>
+    <ProjectGuid>{E44EE82A-AE6D-494B-990B-7880CDDD5582}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">10.0.19041.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">10.0.19041.0</WindowsTargetPlatformVersion>
@@ -85,22 +85,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="ChessGUI.qrc" />
-    <QtUic Include="ChessGUI.ui" />
-    <QtMoc Include="ChessGUI.h" />
-    <ClCompile Include="ChessGUI.cpp" />
+    <QtRcc Include="ChessGUIv2.qrc" />
+    <QtUic Include="ChessGUIv2.ui" />
+    <QtMoc Include="ChessGUIv2.h" />
+    <ClCompile Include="ChessGUIv2.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GraphicsView.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Board\Board.vcxproj">
-      <Project>{12d3fc64-25ae-4171-9e8d-0d2050a0db1f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Chess\Chess.vcxproj">
-      <Project>{5d6e5c15-05f3-4bb2-8fdc-19d8170ee182}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\GameEngine\GameEngine.vcxproj">
       <Project>{107f812d-9d56-4e16-94ff-2a67fb960956}</Project>
     </ProjectReference>

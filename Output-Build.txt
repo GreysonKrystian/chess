@@ -1,0 +1,6 @@
+﻿Build started...
+1>------ Build started: Project: ChessGUI, Configuration: Debug Win32 ------
+1>ChessGUI.cpp
+1>moc_ChessGUI.cpp
+1>ChessGUI.vcxproj -> C:\Users\aleks\source\repos\chees\Debug\ChessGUI.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========

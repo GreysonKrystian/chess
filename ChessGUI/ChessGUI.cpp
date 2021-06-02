@@ -1,4 +1,6 @@
 #include "ChessGUI.h"
+#include <ostream>
+#include <iostream>
 
 ChessGUI::ChessGUI(QWidget* parent)
     : QMainWindow(parent)
@@ -47,5 +49,9 @@ ChessGUI::ChessGUI(QWidget* parent)
     /* ui.field00->resetCachedContent();
      ui.field00->setScene(f00);*/
 
+     
+    
 
+    
+    
 }
