@@ -36,6 +36,7 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
     BKing.addPixmap(b_king);
     BPawn.addPixmap(b_pawn);
     BQueen.addPixmap(b_queen);
+    //connect(fields[i][j], &QPushButton::clicked, this, [=]() {fields[i][j]->setIcon(choose_figure(figure->get_type(), figure->get_color())); });
 }
 
 QIcon ChessGUIV3::choose_figure(std::string figure_type, int color)
@@ -79,12 +80,27 @@ void ChessGUIV3::setup_figures() // dodaje ikony poczatkowe
     {
         for (int j = 0; j < 8; j++)
         {
-            Figure* fig = game.get_board().get_figure(i, j);
             if (game.get_board().get_figure(i,j) != nullptr)
             {
                 Figure* figure = game.get_board().get_figure(i, j);
-                connect(fields[i][j], &QPushButton::clicked, this, [=]() {fields[i][j]->setIcon(choose_figure(figure->get_type(), figure->get_color())); });
+                fields[i][j]->setIcon(choose_figure(figure->get_type(), figure->get_color()));
             }
+               
         }
     }
+}
+
+//void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
+//{
+//    auto pos = figure->get_possible_positions();
+//    for (auto it = pos.begin(); it != pos.end(); ++it)
+//    {
+//        auto cur_pos = *it;
+//        fields[cur_pos[0], cur_pos[1];
+//    }
+//}
+
+void ChessGUIV3::hide_possible_moves_for_figure(Figure* figure)
+{
+
 }

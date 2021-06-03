@@ -16,13 +16,13 @@ Board::Board()
 
 Board::~Board()
 {
-	for (auto itr_x = board.begin(); itr_x != board.end(); ++itr_x)
-	{
-		for (auto itr_y = (*itr_x).begin(); itr_y != (*itr_x).end(); ++itr_y)
-		{
-			delete *itr_y;
-		}
-	}
+	//for (auto itr_x = board.begin(); itr_x != board.end(); ++itr_x)
+	//{
+	//	for (auto itr_y = (*itr_x).begin(); itr_y != (*itr_x).end(); ++itr_y)
+	//	{
+	//		delete *itr_y;
+	//	}
+	//}
 }
 
 std::array<std::array < Figure*, 8>, 8> Board::get_board() const

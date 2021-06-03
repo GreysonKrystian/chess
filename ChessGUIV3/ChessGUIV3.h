@@ -29,9 +29,12 @@ public:
     ChessGUIV3(QWidget* parent = Q_NULLPTR);
     void setup_figures();
 
+   
 private:
     Ui::ChessGUIV3Class ui;
     std::array<std::array <QPushButton*, 8>, 8> fields;
     Game game;
     QIcon choose_figure(std::string figure_type, int color);
+    void show_possible_moves_for_figure(Figure* figure);
+    void hide_possible_moves_for_figure(Figure* figure);
 };
