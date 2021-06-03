@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>973</width>
-    <height>794</height>
+    <height>832</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +15,9 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="field54">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -22,6 +25,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -31,12 +37,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field73">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -44,6 +53,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -53,12 +65,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field03">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -66,6 +81,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -75,12 +93,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field53">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -88,6 +109,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -97,12 +121,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field25">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -110,6 +137,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -119,12 +149,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field60">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -132,6 +165,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -141,12 +177,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field50">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -154,6 +193,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -163,12 +205,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field04">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -176,6 +221,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -185,12 +233,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field46">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -198,6 +249,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -207,12 +261,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field21">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -220,6 +277,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -229,12 +289,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field31">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -242,6 +305,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -251,12 +317,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field06">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -264,6 +333,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -273,12 +345,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field11">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -286,6 +361,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -295,12 +373,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field20">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -308,6 +389,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -317,12 +401,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field13">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -330,6 +417,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -339,12 +429,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field24">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -352,6 +445,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -361,12 +457,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field34">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -374,6 +473,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -383,12 +485,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field65">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -396,6 +501,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -405,12 +513,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field77">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -418,6 +529,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -427,12 +541,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field36">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -440,6 +557,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -449,12 +569,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field37">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -462,6 +585,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -471,12 +597,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field12">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -484,6 +613,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -493,12 +625,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field71">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -506,6 +641,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -515,12 +653,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field45">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -528,6 +669,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -537,12 +681,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field43">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -550,6 +697,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -559,12 +709,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field52">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -572,6 +725,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -581,12 +737,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field27">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -594,6 +753,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -603,12 +765,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field40">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -616,6 +781,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -625,12 +793,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field22">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -638,6 +809,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -647,12 +821,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field10">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -660,6 +837,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -669,12 +849,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field74">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -682,6 +865,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -691,12 +877,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field30">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -704,6 +893,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -713,12 +905,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field35">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -726,6 +921,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -735,12 +933,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field70">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -748,6 +949,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -757,12 +961,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field26">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -770,6 +977,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -779,12 +989,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field76">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -792,6 +1005,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -801,12 +1017,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field66">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -814,6 +1033,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -823,12 +1045,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field14">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -837,6 +1062,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -845,12 +1073,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field67">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -859,6 +1090,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -867,12 +1101,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field07">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -881,6 +1118,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -889,12 +1129,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field17">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -902,6 +1145,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -911,12 +1157,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field56">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -925,6 +1174,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -933,12 +1185,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field05">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -947,6 +1202,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -955,12 +1213,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field72">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -969,6 +1230,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -977,12 +1241,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field61">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -991,6 +1258,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -999,12 +1269,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field55">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -1013,6 +1286,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1021,12 +1297,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field15">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -1035,6 +1314,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1043,12 +1325,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field23">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -1057,6 +1342,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -1065,12 +1353,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field33">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -1078,6 +1369,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -1087,12 +1381,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field47">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -1101,6 +1398,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -1109,12 +1409,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field41">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -1123,6 +1426,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -1131,12 +1437,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field02">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -1145,6 +1454,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1153,12 +1465,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field51">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -1167,6 +1482,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1175,12 +1493,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field32">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -1189,6 +1510,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -1197,12 +1521,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field64">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -1211,6 +1538,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1219,12 +1549,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field63">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -1232,6 +1565,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
@@ -1241,12 +1577,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field62">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -1254,6 +1593,9 @@
       <width>81</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
@@ -1263,12 +1605,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field00">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -1277,6 +1622,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1285,12 +1633,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field01">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -1299,6 +1650,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -1307,12 +1661,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field16">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -1321,6 +1678,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(150, 75, 0)</string>
     </property>
@@ -1329,12 +1689,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field57">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -1343,6 +1706,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1351,12 +1717,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field75">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -1365,6 +1734,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1373,12 +1745,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field44">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -1387,6 +1762,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1395,12 +1773,15 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
    <widget class="QPushButton" name="field42">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -1409,6 +1790,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(230,213,166)</string>
     </property>
@@ -1417,8 +1801,8 @@
     </property>
     <property name="iconSize">
      <size>
-      <width>100</width>
-      <height>100</height>
+      <width>85</width>
+      <height>85</height>
      </size>
     </property>
    </widget>
