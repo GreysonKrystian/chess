@@ -37,7 +37,7 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
     BPawn.addPixmap(b_pawn);
     BQueen.addPixmap(b_queen);
     //connect(fields[i][j], &QPushButton::clicked, this, [=]() {fields[i][j]->setIcon(choose_figure(figure->get_type(), figure->get_color())); });
-    for (int i = 0; i < 8; i++)
+    /*for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 8; j++)
         {
@@ -48,7 +48,8 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
                     });
             }
         }
-    }
+    }*/
+    connect_all();
 }
 
 QIcon ChessGUIV3::choose_figure(std::string figure_type, int color)
@@ -104,28 +105,101 @@ void ChessGUIV3::setup_figures() // dodaje ikony poczatkowe
 
 void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
 {
-    auto pos = figure->get_possible_positions();
+    if (clicked_figure != nullptr)
+    {
+        hide_possible_moves_for_figure(clicked_figure); // usuniêcie podœwietlenia poprzedniej figury
+    }
+    
+    //auto pos = figure->get_possible_positions();
+    auto pos = game.get_board().get_free_positions_for_figure(figure);
+    
     for (auto it = pos.begin(); it != pos.end(); ++it)
     {
         auto cur_pos = *it;
-        fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: red; border: 1px solid black");
+        fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: rgb(150, 0, 0); border: 1px solid black");
+    }
+    clicked_figure = figure;
+    make_move();
+
+}
+
+void ChessGUIV3::disconnect_all()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            fields[i][j]->disconnect();   
+        }
     }
 }
 
+void ChessGUIV3::connect_all()
+{
+    auto figures_to_connect = game.get_player().get_player_figures();
+    for (auto itr = figures_to_connect.begin(); itr != figures_to_connect.end(); ++itr)
+    {
+        int x = (*itr)->get_position()[0];
+        int y = (*itr)->get_position()[1];
+        connect(fields[x][y], &QPushButton::clicked, this, [=]()
+        {show_possible_moves_for_figure(game.get_board().get_figure(x, y));
+        });
+    }
+}
+
+
+
 void ChessGUIV3::hide_possible_moves_for_figure(Figure* figure)
 {
-    auto pos = figure->get_possible_positions();
+    auto pos = game.get_board().get_free_positions_for_figure(figure);
     for (auto it = pos.begin(); it != pos.end(); ++it)
     {
         auto cur_pos = *it;
         if (((cur_pos[0] % 2 == 0) && (cur_pos[1] % 2 == 0)) || ((cur_pos[0] % 2 == 1) && (cur_pos[1] % 2 == 1)))
         {
-            fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: red; border: 5px solid #ff0000;");
+            fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: rgb(230,213,166); border: none");
         }
         else
         {
-            fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: red; border: 5px solid #ff0000;");
+            fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: rgb(150,75,0); border: none;");
         }
 
     }
+}
+
+void ChessGUIV3::make_move()
+{
+    auto moves_to_choose = game.get_board().get_free_positions_for_figure(clicked_figure);
+    for (auto it = moves_to_choose.begin(); it != moves_to_choose.end(); ++it)
+    {
+        int x = (*it)[0];
+        int y = (*it)[1];
+        int x_clicked = clicked_figure->get_position()[0];
+        int y_clicked = clicked_figure->get_position()[1];
+
+        connect(fields[x][y], &QPushButton::clicked, this, [=]()
+                    {fields[x][y]->setIcon(choose_figure(clicked_figure->get_type(), clicked_figure->get_color()));
+                    fields[x_clicked][y_clicked]->setIcon(QIcon());
+                    hide_possible_moves_for_figure(clicked_figure);
+                    game.make_move(clicked_figure, x, y);
+                    game.change_turn();
+                    disconnect_all();
+                    current_turn();
+                    });
+    }
+}
+
+void ChessGUIV3::current_turn()
+{
+    connect_all();
+   // make_move();
+    //if (game.get_current_player() == true) // jesli bialy ma ruch 
+    //{   
+    //    auto king = game.player_white().get_king();
+    //    game.player_white().get_player_figures();
+    //}
+    //else
+    //{
+
+    //}
 }

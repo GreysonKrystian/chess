@@ -26,10 +26,46 @@ Board Game::get_board()
 	return board;
 }
 
+Player Game::get_player()const
+{
+	if (is_white_turn)
+	{
+		return player_white;
+	}
+	else
+	{
+		return player_black;
+	}
+}
+void Game::make_move(Figure* current_figure, int new_x, int new_y)
+{
+	if (board.get_figure(new_x, new_y) != nullptr)
+	{
+		capture_figure(new_x, new_y);
+		board.move_figure(current_figure, new_x, new_y);
+	}
+	else
+	{
+		board.move_figure(current_figure, new_x, new_y);
+	}
+
+	/*int x = current_figure->get_position()[0];
+	int y = current_figure->get_position()[1];
+	Game.get_board().move_figure(current_figure, new_x, new_y);*/
+}
+
 void Game::capture_figure(int x, int y)
 {
  	Figure* captured = board.get_figure(x, y);
-	delete captured;
+	if (captured->get_color() == 0)//czarne
+	{
+		player_black.del_figure(captured);
+	}
+	else
+	{
+		player_black.del_figure(captured);
+	}
+	//delete captured;
 }
 
 bool Game::check_win_condition(Player const& current_player, Player const& checked_player) const
@@ -331,6 +367,8 @@ void Game::change_turn()
 void Game::build_game()
 {
 
+
+
 }
 ///////////////////////////////////////// PLAYER /////////////////////////////////////////////
 
@@ -354,4 +392,11 @@ Figure* Player::get_king() const
 		}
 	}
 	return nullptr;
+}
+
+
+void Player::del_figure(Figure* fig_to_del)
+{
+	auto to_del = std::find(player_figures.begin(), player_figures.end(), fig_to_del);
+	player_figures.erase(to_del);
 }
