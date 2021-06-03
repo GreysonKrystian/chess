@@ -37,6 +37,18 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
     BPawn.addPixmap(b_pawn);
     BQueen.addPixmap(b_queen);
     //connect(fields[i][j], &QPushButton::clicked, this, [=]() {fields[i][j]->setIcon(choose_figure(figure->get_type(), figure->get_color())); });
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (game.get_board().get_figure(i, j) != nullptr)
+            {
+                connect(fields[i][j], &QPushButton::clicked, this, [=]()
+                    {show_possible_moves_for_figure(game.get_board().get_figure(i, j));
+                    });
+            }
+        }
+    }
 }
 
 QIcon ChessGUIV3::choose_figure(std::string figure_type, int color)
@@ -90,17 +102,30 @@ void ChessGUIV3::setup_figures() // dodaje ikony poczatkowe
     }
 }
 
-//void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
-//{
-//    auto pos = figure->get_possible_positions();
-//    for (auto it = pos.begin(); it != pos.end(); ++it)
-//    {
-//        auto cur_pos = *it;
-//        fields[cur_pos[0], cur_pos[1];
-//    }
-//}
+void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
+{
+    auto pos = figure->get_possible_positions();
+    for (auto it = pos.begin(); it != pos.end(); ++it)
+    {
+        auto cur_pos = *it;
+        fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: red; border: 1px solid black");
+    }
+}
 
 void ChessGUIV3::hide_possible_moves_for_figure(Figure* figure)
 {
+    auto pos = figure->get_possible_positions();
+    for (auto it = pos.begin(); it != pos.end(); ++it)
+    {
+        auto cur_pos = *it;
+        if (((cur_pos[0] % 2 == 0) && (cur_pos[1] % 2 == 0)) || ((cur_pos[0] % 2 == 1) && (cur_pos[1] % 2 == 1)))
+        {
+            fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: red; border: 5px solid #ff0000;");
+        }
+        else
+        {
+            fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: red; border: 5px solid #ff0000;");
+        }
 
+    }
 }
