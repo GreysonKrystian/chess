@@ -39,6 +39,7 @@ Player Game::get_player()const
 }
 void Game::make_move(Figure* current_figure, int new_x, int new_y)
 {
+
 	if (board.get_figure(new_x, new_y) != nullptr)
 	{
 		capture_figure(new_x, new_y);
@@ -63,7 +64,7 @@ void Game::capture_figure(int x, int y)
 	}
 	else
 	{
-		player_black.del_figure(captured);
+		player_white.del_figure(captured);
 	}
 	//delete captured;
 }
