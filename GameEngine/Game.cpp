@@ -11,7 +11,14 @@ Game::Game()
 
 Game::~Game()
 {
-
+	auto my_board = this->get_board().get_board();
+	for (auto itr_x = my_board.begin(); itr_x != my_board.end(); ++itr_x)
+	{
+		for (auto itr_y = (*itr_x).begin(); itr_y != (*itr_x).end(); ++itr_y)
+		{
+			delete* itr_y;
+		}
+	}
 }
 
 Board Game::get_board()
@@ -256,9 +263,6 @@ void Game::create_figures()
 
 bool Game::castling_left_conditions(int pos_x, int pos_y) const
 {
-
-
-
 	if (board.get_figure(pos_x - 4, pos_y) == nullptr)
 		return false;
 	else

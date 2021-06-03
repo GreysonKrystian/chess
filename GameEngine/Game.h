@@ -14,8 +14,8 @@ public:
 
 class Game
 {
-private:
 	Board board;
+private:
 	bool is_white_turn;
 	Player player_white;
 	Player player_black;
