@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChessGUI", "ChessGUI\ChessG
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChessGUIv2", "ChessGUIv2\ChessGUIv2.vcxproj", "{E44EE82A-AE6D-494B-990B-7880CDDD5582}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChessGUIV3", "ChessGUIV3\ChessGUIV3.vcxproj", "{494CFF99-917A-477C-A00D-E23E6BA10424}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -127,6 +129,12 @@ Global
 		{E44EE82A-AE6D-494B-990B-7880CDDD5582}.Release|x64.ActiveCfg = Release|Win32
 		{E44EE82A-AE6D-494B-990B-7880CDDD5582}.Release|x86.ActiveCfg = Release|Win32
 		{E44EE82A-AE6D-494B-990B-7880CDDD5582}.Release|x86.Build.0 = Release|Win32
+		{494CFF99-917A-477C-A00D-E23E6BA10424}.Debug|x64.ActiveCfg = Debug|x64
+		{494CFF99-917A-477C-A00D-E23E6BA10424}.Debug|x64.Build.0 = Debug|x64
+		{494CFF99-917A-477C-A00D-E23E6BA10424}.Debug|x86.ActiveCfg = Debug|x64
+		{494CFF99-917A-477C-A00D-E23E6BA10424}.Release|x64.ActiveCfg = Release|x64
+		{494CFF99-917A-477C-A00D-E23E6BA10424}.Release|x64.Build.0 = Release|x64
+		{494CFF99-917A-477C-A00D-E23E6BA10424}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

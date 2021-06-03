@@ -148,6 +148,9 @@
     <ProjectReference Include="..\Chess\Chess.vcxproj">
       <Project>{5d6e5c15-05f3-4bb2-8fdc-19d8170ee182}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\GameEngine\GameEngine.vcxproj">
+      <Project>{107f812d-9d56-4e16-94ff-2a67fb960956}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

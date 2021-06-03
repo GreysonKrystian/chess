@@ -8,7 +8,7 @@
 #include "../Chess/Queen.h"
 #include "../Chess/Pawn.h"
 #include "../Chess/Rook.h"
-
+#include "../GameEngine/Game.h"
 #include "../Board/Board.h"
 #include <string>
 
@@ -16,6 +16,7 @@ using namespace std;
 
 int main()
 {
+	Game game;
 	/*Knight goniec(1, 7, 0);
 	list<vector<int>> lista = goniec.get_possible_positions();
 	cout << "////////////// /////////////////////" << endl;
