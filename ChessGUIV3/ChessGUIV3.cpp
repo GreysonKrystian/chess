@@ -36,7 +36,19 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
     BKing.addPixmap(b_king);
     BPawn.addPixmap(b_pawn);
     BQueen.addPixmap(b_queen);
-    //connect(fields[i][j], &QPushButton::clicked, this, [=]() {fields[i][j]->setIcon(choose_figure(figure->get_type(), figure->get_color())); });
+    
+    QPixmap mateusz("om.png");
+    mateusz = mateusz.scaled(ui.logo->size(), Qt::KeepAspectRatio);
+    ui.logo->setPixmap(mateusz);
+
+    QPixmap fight("fight.png");
+    //fight = fight.scaled(ui.playbutton->size(), Qt::KeepAspectRatio);
+    //ui.playbutton->setIconSize(ui.playbutton->size());
+    ui.playbutton->setIcon(fight);
+
+
+    //ui.playbutton->setEnabled(false);
+    connect(ui.playbutton, &QPushButton::clicked, this, [=]() {ui.stackedWidget->setCurrentIndex(0); });
     /*for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 8; j++)
@@ -116,7 +128,7 @@ void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
     for (auto it = pos.begin(); it != pos.end(); ++it)
     {
         auto cur_pos = *it;
-        fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: rgb(150, 0, 0); border: 1px solid black");
+        fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: rgb(44, 163, 44); border: 1px solid black");
     }
     clicked_figure = figure;
     make_move();
