@@ -42,4 +42,5 @@ private:
     void make_move();
     void disconnect_all();
     void connect_all();
+    void display_whose_turn();
 };

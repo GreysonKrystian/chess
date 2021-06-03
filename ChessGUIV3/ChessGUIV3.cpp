@@ -1,4 +1,5 @@
 #include "ChessGUIV3.h"
+#include <QMovie>
 
 ChessGUIV3::ChessGUIV3(QWidget *parent)
     : QMainWindow(parent)
@@ -37,9 +38,14 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
     BPawn.addPixmap(b_pawn);
     BQueen.addPixmap(b_queen);
     
-    QPixmap mateusz("om.png");
+    /*QPixmap mateusz("om.png");
     mateusz = mateusz.scaled(ui.logo->size(), Qt::KeepAspectRatio);
-    ui.logo->setPixmap(mateusz);
+    ui.logo->setPixmap(mateusz);*/
+
+   QMovie* mateusz = new QMovie("om2.gif");
+   //mateusz = mateusz.scaled(ui.logo->size(), Qt::KeepAspectRatio);
+   ui.logo->setMovie(mateusz);
+   mateusz->start();
 
     QPixmap fight("fight.png");
     //fight = fight.scaled(ui.playbutton->size(), Qt::KeepAspectRatio);
@@ -62,6 +68,7 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
         }
     }*/
     connect_all();
+    display_whose_turn();
 }
 
 QIcon ChessGUIV3::choose_figure(std::string figure_type, int color)
@@ -195,11 +202,25 @@ void ChessGUIV3::make_move()
                     hide_possible_moves_for_figure(clicked_figure);
                     game.make_move(clicked_figure, x, y);
                     game.change_turn();
+                    display_whose_turn();
                     disconnect_all();
                     current_turn();
                     });
     }
 }
+
+void ChessGUIV3::display_whose_turn()
+{
+    if (game.get_current_player() == 1)
+    {
+        ui.turn->setText("Tura Bialych");
+    }
+    else
+    {
+        ui.turn->setText("Tura Czarnych");
+    }
+}
+
 
 void ChessGUIV3::current_turn()
 {
