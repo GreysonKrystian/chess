@@ -42,7 +42,7 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
     mateusz = mateusz.scaled(ui.logo->size(), Qt::KeepAspectRatio);
     ui.logo->setPixmap(mateusz);*/
 
-   QMovie* mateusz = new QMovie("om2.gif");
+   QMovie* mateusz = new QMovie("3d1.gif");
    //mateusz = mateusz.scaled(ui.logo->size(), Qt::KeepAspectRatio);
    ui.logo->setMovie(mateusz);
    mateusz->start();
@@ -55,18 +55,7 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
 
     //ui.playbutton->setEnabled(false);
     connect(ui.playbutton, &QPushButton::clicked, this, [=]() {ui.stackedWidget->setCurrentIndex(0); });
-    /*for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-            if (game.get_board().get_figure(i, j) != nullptr)
-            {
-                connect(fields[i][j], &QPushButton::clicked, this, [=]()
-                    {show_possible_moves_for_figure(game.get_board().get_figure(i, j));
-                    });
-            }
-        }
-    }*/
+    
     connect_all();
     display_whose_turn();
 }
