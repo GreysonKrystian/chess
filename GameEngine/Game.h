@@ -36,6 +36,7 @@ public:
 	bool check_win_condition(Player const& current_player, Player const& checked_player) const;
 	void change_turn();
 	bool check_promote_pawn(Figure* pawn);
+	std::vector<int> do_castling(int new_x, int new_y);
 	void make_move(Figure*, int, int);
 	std::list<std::vector<int>> get_castling_positions() const;
 	Board get_board();

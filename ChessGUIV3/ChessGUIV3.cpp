@@ -175,6 +175,11 @@ void ChessGUIV3::connect_all()
 void ChessGUIV3::hide_possible_moves_for_figure(Figure* figure)
 {
     auto pos = game.get_board().get_free_positions_for_figure(figure);
+    if (figure->get_type() == "K")
+    {
+        auto castling = game.get_castling_positions();
+        pos.insert(pos.end(), castling.begin(), castling.end());
+    }
     for (auto it = pos.begin(); it != pos.end(); ++it)
     {
         auto cur_pos = *it;
@@ -193,6 +198,12 @@ void ChessGUIV3::hide_possible_moves_for_figure(Figure* figure)
 void ChessGUIV3::make_move()
 {
     auto moves_to_choose = game.get_board().get_free_positions_for_figure(clicked_figure);
+    if (clicked_figure->get_type() == "K")
+    {
+        auto castling = game.get_castling_positions();
+        moves_to_choose.insert(moves_to_choose.end(), castling.begin(), castling.end());
+
+    }
     for (auto it = moves_to_choose.begin(); it != moves_to_choose.end(); ++it)
     {
         int x = (*it)[0];
@@ -204,11 +215,20 @@ void ChessGUIV3::make_move()
                     {fields[x][y]->setIcon(choose_figure(clicked_figure->get_type(), clicked_figure->get_color()));
                     fields[x_clicked][y_clicked]->setIcon(QIcon());
                     hide_possible_moves_for_figure(clicked_figure);
-                    game.make_move(clicked_figure, x, y);
-                    if (clicked_figure->get_type() == "R")
+                    if (clicked_figure->get_type() == "K")
                     {
-
+                        auto castling_tiles = game.get_castling_positions();
+                        for (auto iter = castling_tiles.begin(); iter != castling_tiles.end(); ++iter)
+                        {
+                            if ((x == (*iter)[0]) && (y == (*iter)[1]))
+                            {
+                                auto rook_coords = game.do_castling(x, y);
+                                fields[rook_coords[2]][rook_coords[3]]->setIcon(choose_figure("R", clicked_figure->get_color()));
+                                fields[rook_coords[0]][rook_coords[1]]->setIcon(QIcon());
+                            }
+                        }
                     }
+                    game.make_move(clicked_figure, x, y);
                     if (clicked_figure->get_type() == "P")
                     {
                         if (game.check_promote_pawn(clicked_figure) == true)
