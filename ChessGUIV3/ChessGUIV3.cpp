@@ -131,7 +131,11 @@ void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
     
     //auto pos = figure->get_possible_positions();
     auto pos = game.get_board().get_free_positions_for_figure(figure);
-    
+    if (figure->get_type() == "K")
+    {
+        auto castling = game.get_castling_positions();
+        pos.insert(pos.end(), castling.begin(), castling.end());
+    }
     for (auto it = pos.begin(); it != pos.end(); ++it)
     {
         auto cur_pos = *it;
@@ -201,6 +205,18 @@ void ChessGUIV3::make_move()
                     fields[x_clicked][y_clicked]->setIcon(QIcon());
                     hide_possible_moves_for_figure(clicked_figure);
                     game.make_move(clicked_figure, x, y);
+                    if (clicked_figure->get_type() == "R")
+                    {
+
+                    }
+                    if (clicked_figure->get_type() == "P")
+                    {
+                        if (game.check_promote_pawn(clicked_figure) == true)
+                        {
+                            clicked_figure = game.get_board().get_figure(x, y);
+                            fields[x][y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
+                        }
+                    }
                     game.change_turn();
                     display_whose_turn();
                     disconnect_all();

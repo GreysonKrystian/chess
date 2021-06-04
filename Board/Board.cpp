@@ -30,6 +30,14 @@ std::array<std::array < Figure*, 8>, 8> Board::get_board() const
 	return board;
 }
 
+void Board::replace_figure(Figure* old_figure, Figure* new_figure)
+{
+	int x = old_figure->get_position()[0];
+	int y = old_figure->get_position()[1];
+	board[x][y] = new_figure;
+	delete old_figure;
+}
+
 void Board::set_starting_postions(std::list < Figure*> const& figure_list)
 {
 	for (auto itr = figure_list.begin(); itr != figure_list.end(); ++itr)
@@ -276,3 +284,4 @@ std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> const& 
 	}
 	return positions_behind; 
 }
+

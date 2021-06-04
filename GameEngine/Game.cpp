@@ -1,6 +1,5 @@
 ﻿#include "Game.h"
 
-
 Game::Game()
 {
 	is_white_turn = true;
@@ -365,9 +364,30 @@ void Game::change_turn()
 	}
 }
 
-void Game::build_game()
+bool Game::check_promote_pawn(Figure* pawn)
 {
-
+	if (is_white_turn == true)
+	{
+		if (pawn->get_position()[1] == 0)
+		{
+			Figure* promoted_queen = new Queen(1, pawn->get_position()[0], 0); // tutaj trzeba ogarnac wstawianie figury jesli bicie na ukos to bedzie inny x
+			player_white.replace_figure(promoted_queen, pawn);
+			board.replace_figure(pawn, promoted_queen);
+			return true;
+		}
+		return false;
+	}
+	else
+	{
+		if (pawn->get_position()[1] == 7)
+		{
+			Figure* promoted_queen = new Queen(0, pawn->get_position()[0], 7);
+			player_black.replace_figure(promoted_queen, pawn);
+			board.replace_figure(pawn, promoted_queen);
+			return true;
+		}
+		return false;
+	}
 
 
 }
@@ -400,4 +420,9 @@ void Player::del_figure(Figure* fig_to_del)
 {
 	auto to_del = std::find(player_figures.begin(), player_figures.end(), fig_to_del);
 	player_figures.erase(to_del);
+}
+
+void Player::replace_figure(Figure* fig_to_add, Figure* current_figure)
+{
+	std::replace(player_figures.begin(), player_figures.end(), current_figure, fig_to_add);
 }

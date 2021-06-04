@@ -25,4 +25,5 @@ public:
 	void move_figure(Figure* my_figure, int x, int y);
 	Figure* get_figure(int, int) const;
 	std::array<std::array < Figure*, 8>, 8> get_board() const;
+	void replace_figure(Figure* old_figure, Figure* new_figure);
 };
