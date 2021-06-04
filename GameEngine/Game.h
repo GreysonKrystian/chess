@@ -26,7 +26,7 @@ private:
 	std::list<std::vector<int>> restrict_king_positions(Player const& current_player, Player const& checked_player) const;
 	bool castling_left_conditions(int pos_x, int pos_y) const;
 	bool castling_right_conditions(int pos_x, int pos_y) const;
-	std::list<Figure*> get_checking_figures(Player const& current_player) const;
+	std::list<Figure*> get_checking_figures() const;
 	void create_figures();
 
 public:
@@ -40,6 +40,7 @@ public:
 	std::list<std::vector<int>> get_castling_positions() const;
 	Board get_board();
 	bool get_current_player() const; // sprawdz ktory kolor ma ruch bialy = true, czarny false
-	std::list<std::vector<int>> get_allowed_moves(Player const&) const; //zwraca możliwe ruchy dla szachowanego gracza
-	Player get_player()const;
+	std::list<std::vector<int>> get_allowed_moves() const; //zwraca możliwe ruchy dla szachowanego gracza
+	Player get_player()const; // zwraca gracza który ma teraz turę
+	Player get_enemy_player()const; // zwraca gracza który nie ma tury  
 };

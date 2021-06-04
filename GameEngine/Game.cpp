@@ -36,6 +36,21 @@ Player Game::get_player()const
 		return player_black;
 	}
 }
+
+Player Game::get_enemy_player()const
+{
+	if (is_white_turn)
+	{
+		return player_black;
+	}
+	else
+	{
+		return player_white;
+	}
+}
+
+
+
 void Game::make_move(Figure* current_figure, int new_x, int new_y)
 {
 
@@ -71,20 +86,26 @@ void Game::capture_figure(int x, int y)
 bool Game::check_win_condition(Player const& current_player, Player const& checked_player) const
 {
 	auto king_positions = restrict_king_positions(current_player, checked_player);
-	if ((get_allowed_moves(current_player).size() == 0) && (king_positions.size() == 0))
+	if ((get_allowed_moves().size() == 0) && (king_positions.size() == 0))
 	{
 		return true;
 	}
 	return false;
+
+
 }
 
-std::list<Figure*> Game::get_checking_figures(Player const& current_player) const
+std::list<Figure*> Game::get_checking_figures() const
 {
+	Player cur_player = get_player();
+	Player ene_player = get_enemy_player();
+
+
 	std::list<Figure*> checking_figures;
 
-	std::vector<int> king_pos = current_player.get_king()->get_position();
+	std::vector<int> king_pos = cur_player.get_king()->get_position();
 	
-	auto enemy_figures = current_player.get_player_figures();
+	auto enemy_figures = ene_player.get_player_figures();
 	for (auto itr_fig = enemy_figures.begin(); itr_fig != enemy_figures.end(); ++itr_fig)
 	{
 		std::list<std::vector<int>> figure_move_positions = board.get_free_positions_for_figure(*itr_fig);
@@ -97,125 +118,129 @@ std::list<Figure*> Game::get_checking_figures(Player const& current_player) cons
 	return checking_figures;
 }
 
-std::list<std::vector<int>> Game::get_allowed_moves(Player const& current_player) const //zwraca możliwe ruchy dla szachowanego gracza
+std::list<std::vector<int>> Game::get_allowed_moves() const //zwraca możliwe ruchy dla szachowanego gracza
 {
 	std::list<std::vector<int>> allowed_positions;
 
-	std::list<Figure*> checking_figures = get_checking_figures(current_player);
-
-	auto itr_checking_figure = checking_figures.begin();
-	std::vector<int> checking_pos = (*itr_checking_figure)->get_position();
-
-	int checking_x = checking_pos[0];
-	int checking_y = checking_pos[1];
-
-	std::vector<int> king_pos = (current_player.get_king())->get_position();
+	std::list<Figure*> checking_figures = get_checking_figures();
+	std::vector<int> king_pos = (get_player().get_king())->get_position();
 	int king_x = king_pos[0];
 	int king_y = king_pos[1];
-
-	if ((king_x == checking_x) && (checking_y > king_y)) //pion w górę
+	for (auto itr = checking_figures.begin(); itr != checking_figures.end(); ++itr)
 	{
-		king_y--;
-		while (king_y > checking_y)
+		std::vector<int> checking_pos = (*itr)->get_position();
+
+		int checking_x = checking_pos[0];
+		int checking_y = checking_pos[1];
+
+
+		if ((king_x == checking_x) && (checking_y > king_y)) //pion w górę
 		{
-			std::vector<int> point = { king_x, king_y };
-			allowed_positions.push_back(point);
 			king_y--;
+			while (king_y > checking_y)
+			{
+				std::vector<int> point = { king_x, king_y };
+				allowed_positions.push_back(point);
+				king_y--;
+			}
 		}
-	}
 
-	if ((king_x == checking_x) && (checking_y < king_y)) //pion w dół
-	{
-		king_y++;
-		while (king_y < checking_y)
+		if ((king_x == checking_x) && (checking_y < king_y)) //pion w dół
 		{
-			std::vector<int> point = { king_x, king_y };
-			allowed_positions.push_back(point);
 			king_y++;
+			while (king_y < checking_y)
+			{
+				std::vector<int> point = { king_x, king_y };
+				allowed_positions.push_back(point);
+				king_y++;
+			}
 		}
-	}
 
-
-	if ((checking_x > king_x) && (checking_y == king_y)) //poziom w prawo
-	{
-		king_x++;
-		while (king_x < checking_x)
+		if ((checking_x > king_x) && (checking_y == king_y)) //poziom w prawo
 		{
-			std::vector<int> point = { king_x, king_y };
-			allowed_positions.push_back(point);
 			king_x++;
+			while (king_x < checking_x)
+			{
+				std::vector<int> point = { king_x, king_y };
+				allowed_positions.push_back(point);
+				king_x++;
+			}
 		}
-	}
 
-	if ((checking_x < king_x) && (checking_y == king_y)) //poziom w lewo
-	{
-		king_x--;
-		while (king_x > checking_x)
+		if ((checking_x < king_x) && (checking_y == king_y)) //poziom w lewo
 		{
-			std::vector<int> point = { king_x, king_y };
-			allowed_positions.push_back(point);
 			king_x--;
+			while (king_x > checking_x)
+			{
+				std::vector<int> point = { king_x, king_y };
+				allowed_positions.push_back(point);
+				king_x--;
+			}
 		}
-	}
 
-	if ((checking_x > king_x) && (checking_y < king_y)) // prawy ukos w górę
-	{
-		king_x++;
-		king_y--;
-		while (king_x < checking_x && king_y > checking_y)
+		if ((checking_x > king_x) && (checking_y < king_y)) // prawy ukos w górę
 		{
-			std::vector<int> point = { king_x, king_y };
-			allowed_positions.push_back(point);
 			king_x++;
 			king_y--;
+			while (king_x < checking_x && king_y > checking_y)
+			{
+				std::vector<int> point = { king_x, king_y };
+				allowed_positions.push_back(point);
+				king_x++;
+				king_y--;
+			}
 		}
-	}
 
-	if ((checking_x > king_x) && (checking_y > king_y)) // prawy ukos w dół
-	{
-		king_x++;
-		king_y++;
-		while (king_x < checking_x && king_y < checking_y)
+		if ((checking_x > king_x) && (checking_y > king_y)) // prawy ukos w dół
 		{
-			std::vector<int> point = { king_x, king_y };
-			allowed_positions.push_back(point);
 			king_x++;
 			king_y++;
+			while (king_x < checking_x && king_y < checking_y)
+			{
+				std::vector<int> point = { king_x, king_y };
+				allowed_positions.push_back(point);
+				king_x++;
+				king_y++;
+			}
 		}
-	}
 
-	if ((checking_x < king_x) && (checking_y < king_y)) // lewy ukos w górę
-	{
-		king_x--;
-		king_y--;
-		while (king_x > checking_x && king_y > checking_y)
+		if ((checking_x < king_x) && (checking_y < king_y)) // lewy ukos w górę
 		{
-			std::vector<int> point = { king_x, king_y };
-			allowed_positions.push_back(point);
 			king_x--;
 			king_y--;
+			while (king_x > checking_x && king_y > checking_y)
+			{
+				std::vector<int> point = { king_x, king_y };
+				allowed_positions.push_back(point);
+				king_x--;
+				king_y--;
+			}
 		}
-	}
 
-	if ((checking_x < king_x) && (checking_y > king_y)) // lewy ukos w dół
-	{
-		king_x--;
-		king_y++;
-		while (king_x > checking_x && king_y < checking_y)
+		if ((checking_x < king_x) && (checking_y > king_y)) // lewy ukos w dół
 		{
-			std::vector<int> point = { king_x, king_y };
-			allowed_positions.push_back(point);
 			king_x--;
 			king_y++;
+			while (king_x > checking_x && king_y < checking_y)
+			{
+				std::vector<int> point = { king_x, king_y };
+				allowed_positions.push_back(point);
+				king_x--;
+				king_y++;
+			}
 		}
-	}
 
+	}
 	return allowed_positions;
 }
 
 
 std::list<std::vector<int>> Game::restrict_king_positions(Player const& current_player, Player const& checked_player) const //zrwaca listę pól na które może ruszyć się król, ze względu na przeciwne figury // przyjmuje grasza szachującego
 {
+	Player currrent_player = get_player();
+	Player enem_player = get_enemy_player();
+
+
 	Figure* king = checked_player.get_king();
 	std::list<std::vector<int>> king_free_positions = board.get_free_positions_for_figure(king);
 	
@@ -230,7 +255,7 @@ std::list<std::vector<int>> Game::restrict_king_positions(Player const& current_
 	//		king_free_positions.erase(itr_del);
 	//	}
 	//}
-	auto checking_figures = get_checking_figures(current_player);
+	auto checking_figures = get_checking_figures();
 	auto temp_board = board.get_board();
 	temp_board[king->get_position()[0]][king->get_position()[1]] = nullptr;
 	for (auto itr = checking_figures.begin(); itr != checking_figures.end(); ++itr)
