@@ -21,6 +21,7 @@ public:
 	~Board();
 	std::list<std::vector<int>> get_positions_behind(std::vector<int> const&, std::vector<int> const&) const; //zwraca pola za zajętym polem na planszy np. dla królowej
 	std::list<std::vector<int>> get_free_positions_for_figure(Figure*) const;
+	std::list<std::vector<int>> get_castling_positions() const;
 	void set_starting_postions(std::list<Figure*> const &);
 	void move_figure(Figure* my_figure, int x, int y);
 	Figure* get_figure(int, int) const;

@@ -341,7 +341,7 @@ bool Game::castling_right_conditions(int pos_x, int pos_y) const
 		return false;
 	else
 	{
-		Figure* corner_figure = board.get_figure(pos_y + 3, pos_y);
+		Figure* corner_figure = board.get_figure(pos_x + 3, pos_y);
 		if ((corner_figure->get_type() == "R") && (corner_figure->get_first_move() == true))
 			return true;
 		return false;
@@ -352,10 +352,10 @@ std::list<std::vector<int>> Game::get_castling_positions() const
 {
 	int pos_x = 4;
 	int pos_y = 0;
-	if (get_current_player() == true)
+	if (is_white_turn == true)
 	{
-		int pos_x = 4;
-		int pos_y = 7;
+		pos_x = 4;
+		pos_y = 7;
 	}
 	std::list<std::vector<int>> castling_positions;
 
@@ -415,6 +415,37 @@ bool Game::check_promote_pawn(Figure* pawn)
 	}
 
 
+}
+
+std::vector<int> Game::do_castling(int new_x, int new_y)
+{
+	std::vector<int> rook_coords;
+	Figure* king;
+	if (is_white_turn == true)
+	{
+		king = player_white.get_king();
+	}
+	else
+	{
+		king = player_black.get_king();
+	}
+		if (king->get_position()[0] == new_x + 2)
+		{
+			rook_coords.push_back(0);
+			rook_coords.push_back(new_y);
+			rook_coords.push_back(3);
+			rook_coords.push_back(king->get_position()[1]);
+			board.move_figure(board.get_figure(0, new_y), 3, new_y);
+		}
+		if (king->get_position()[0] == new_x - 2)
+		{
+			rook_coords.push_back(7);
+			rook_coords.push_back(new_y);
+			rook_coords.push_back(5);
+			rook_coords.push_back(king->get_position()[1]);
+			board.move_figure(board.get_figure(7, new_y), 5, new_y);
+		}
+		return rook_coords;
 }
 ///////////////////////////////////////// PLAYER /////////////////////////////////////////////
 

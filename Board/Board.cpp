@@ -129,8 +129,14 @@ std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figu
 			}
 		}
 	}
+	if (my_figure->get_type() == "K") // roszada
+	{
+
+	}
 	return possible_pos;
 }
+
+
 
 std::list<std::vector<int>> Board::get_strike_positions_for_pawn(Figure* my_pawn) const
 {
