@@ -46,5 +46,5 @@ public:
 	Player get_player()const; // zwraca gracza który ma teraz turę
 	Player get_enemy_player()const; // zwraca gracza który nie ma tury  
 	std::vector<Figure*> get_guarding_figures();
-	std::list<std::vector<int>> get_final_moves_for_figure(Figure*);
+	std::list<std::vector<int>> get_final_moves_for_figure(Figure*); // zwraca ostateczne możliwe ruchy figury uwzględniająć możliwego szacha króla
 };

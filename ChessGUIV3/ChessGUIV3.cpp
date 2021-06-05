@@ -131,10 +131,8 @@ void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
         fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: rgb(44, 163, 44); border: 1px solid black");
     }
     
-
     clicked_figure = figure;
     make_move();
-
 }
 
 void ChessGUIV3::disconnect_all()
@@ -188,7 +186,7 @@ void ChessGUIV3::hide_possible_moves_for_figure(Figure* figure)
 
 void ChessGUIV3::make_move()
 {
-    auto moves_to_choose = game.get_board().get_free_positions_for_figure(clicked_figure);
+    auto moves_to_choose = game.get_final_moves_for_figure(clicked_figure);
     if (clicked_figure->get_type() == "K")
     {
         auto castling = game.get_castling_positions();

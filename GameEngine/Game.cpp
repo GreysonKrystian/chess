@@ -53,7 +53,7 @@ std::vector<Figure*> Game::get_guarding_figures()
 {
 	std::vector<Figure*> guarding_figures;
 	Player current_player = get_player();
-	Board& board_backup = board;
+	Board board_backup = board;
 	std::list<Figure*> figures_to_check = current_player.get_player_figures();
 	for (auto iter = figures_to_check.begin(); iter != figures_to_check.end(); ++iter)
 	{
@@ -263,7 +263,6 @@ std::list<std::vector<int>> Game::restrict_king_positions() //zrwaca listę pól
 
 
 
-
 void Game::create_figures()
 {
 	//czarne
@@ -314,7 +313,6 @@ void Game::create_figures()
 }
 
 
-
 bool Game::castling_left_conditions(int pos_x, int pos_y) const
 {
 	if (board.get_figure(pos_x - 4, pos_y) == nullptr)
@@ -353,7 +351,7 @@ std::list<std::vector<int>> Game::get_castling_positions() const
 	std::list<std::vector<int>> castling_positions;
 
 	if ((castling_left_conditions(pos_x, pos_y) == true) && (board.get_figure(pos_x - 1, pos_y) == nullptr) && (board.get_figure(pos_x - 2, pos_y) == nullptr)
-		&& board.get_figure(pos_x - 3, pos_y))
+		&& board.get_figure(pos_x - 3, pos_y) == nullptr)
 	{
 		castling_positions.push_back({ pos_x - 2, pos_y });
 	}
@@ -422,23 +420,24 @@ std::vector<int> Game::do_castling(int new_x, int new_y)
 	{
 		king = player_black.get_king();
 	}
-		if (king->get_position()[0] == new_x + 2)
-		{
-			rook_coords.push_back(0);
-			rook_coords.push_back(new_y);
-			rook_coords.push_back(3);
-			rook_coords.push_back(king->get_position()[1]);
-			board.move_figure(board.get_figure(0, new_y), 3, new_y);
-		}
-		if (king->get_position()[0] == new_x - 2)
-		{
-			rook_coords.push_back(7);
-			rook_coords.push_back(new_y);
-			rook_coords.push_back(5);
-			rook_coords.push_back(king->get_position()[1]);
-			board.move_figure(board.get_figure(7, new_y), 5, new_y);
-		}
-		return rook_coords;
+	
+	if (king->get_position()[0] == new_x + 2)
+	{
+		rook_coords.push_back(0);
+		rook_coords.push_back(new_y);
+		rook_coords.push_back(3);
+		rook_coords.push_back(king->get_position()[1]);
+		board.move_figure(board.get_figure(0, new_y), 3, new_y);
+	}
+	if (king->get_position()[0] == new_x - 2)
+	{
+		rook_coords.push_back(7);
+		rook_coords.push_back(new_y);
+		rook_coords.push_back(5);
+		rook_coords.push_back(king->get_position()[1]);
+		board.move_figure(board.get_figure(7, new_y), 5, new_y);
+	}
+	return rook_coords;
 }
 
 
