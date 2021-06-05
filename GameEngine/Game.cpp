@@ -64,6 +64,7 @@ std::vector<Figure*> Game::get_guarding_figures()
 		{
 			guarding_figures.push_back((*iter));
 		}
+		board.swap_board(board_backup.get_board());
 	}
 	return guarding_figures;
 }
