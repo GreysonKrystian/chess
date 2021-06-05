@@ -83,15 +83,15 @@ void Game::capture_figure(int x, int y)
 	//delete captured;
 }
 
-bool Game::check_win_condition(Player const& current_player, Player const& checked_player) const
-{
-	auto king_positions = restrict_king_positions();
-	if ((get_allowed_moves().size() == 0) && (king_positions.size() == 0))
-	{
-		return true;
-	}
-	return false;
-}
+//bool Game::check_win_condition(Player const& current_player, Player const& checked_player) const
+//{
+//	auto king_positions = restrict_king_positions();
+//	if ((get_allowed_moves().size() == 0) && (king_positions.size() == 0))
+//	{
+//		return true;
+//	}
+//	return false;
+//}
 
 
 std::list<Figure*> Game::get_checking_figures() const
@@ -116,7 +116,7 @@ std::list<Figure*> Game::get_checking_figures() const
 	return checking_figures;
 }
 
-std::list<std::vector<int>> Game::get_final_moves_for_figure(Figure* my_figure) const
+std::list<std::vector<int>> Game::get_final_moves_for_figure(Figure* my_figure)
 {
 	auto checking_figures = get_checking_figures();
 	auto allowed_player_moves = get_allowed_moves();
@@ -172,7 +172,7 @@ std::list<std::vector<int>> Game::get_allowed_moves() const //zwraca możliwe ru
 }
 
 
-std::list<std::vector<int>> Game::restrict_king_positions() const //zrwaca listę pól na które może ruszyć się król, ze względu na przeciwne figury // przyjmuje grasza szachującego
+std::list<std::vector<int>> Game::restrict_king_positions() //zrwaca listę pól na które może ruszyć się król, ze względu na przeciwne figury // przyjmuje grasza szachującego
 {
 	Player checked_player = get_player();
 	Player enem_player = get_enemy_player();
@@ -199,7 +199,7 @@ std::list<std::vector<int>> Game::restrict_king_positions() const //zrwaca list�
 	auto checking_figures = get_checking_figures();
 	auto temp_board = board.get_board();
 	temp_board[king->get_position()[0]][king->get_position()[1]] = nullptr;
-	for (auto itr = checking_figures.begin(); itr != checking_figures.end(); ++itr)
+	for (auto itr = checking_figures.begin(); itr != checking_figures.end(); ++itr) // usuwa możliwość ruchu króla w lini szacha 
 	{
 		std::list<std::vector<int>> attacking_positions = (*itr)->get_possible_positions();
 		for (auto itr_attack = attacking_positions.begin(); itr_attack != attacking_positions.end(); ++itr_attack)
@@ -212,8 +212,36 @@ std::list<std::vector<int>> Game::restrict_king_positions() const //zrwaca list�
 			}
 		}
 	}
-	return king_free_positions;
+
+	Board backup_board = board;
+	int backup_kin_x = king->get_position()[0];
+	int backup_kin_y = king->get_position()[1];
+
+
+	std::list<std::vector<int>> final_positions = king_free_positions;
+
+	for (auto itr = king_free_positions.begin(); itr != king_free_positions.end(); ++itr)
+	{
+		auto temp_board_3 = board;
+		temp_board_3.move_figure(king, (*itr)[0], (*itr)[1]);
+		
+		board.swap_board(temp_board_3.get_board());
+
+		if (size(get_checking_figures()) >= 1)
+		{
+			if (itr != king_free_positions.end())
+			{
+				final_positions.remove(*itr);
+			}
+		}
+	}
+	board.move_figure(king, backup_kin_x, backup_kin_y);
+	board.swap_board(backup_board.get_board());
+
+	return final_positions;
 }
+
+
 
 
 void Game::create_figures()
