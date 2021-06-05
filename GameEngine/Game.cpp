@@ -49,9 +49,9 @@ Player Game::get_enemy_player()const
 	}
 }
 
-std::vector<Figure*> Game::get_guarding_figures()
+std::vector<Figure*> Game::get_possible_checking_figures()
 {
-	std::vector<Figure*> guarding_figures;
+	std::vector<Figure*> get_possible_checking_figures;
 	Player current_player = get_player();
 	Board board_backup = board;
 	std::list<Figure*> figures_to_check = current_player.get_player_figures();
@@ -60,13 +60,17 @@ std::vector<Figure*> Game::get_guarding_figures()
 		auto temp_board = board.get_board();
 		temp_board[(*iter)->get_position()[0]][(*iter)->get_position()[1]] = nullptr;
 		board.swap_board(temp_board);
-		if (get_checking_figures().size() == 1)
+		auto checking_figures = get_checking_figures();
+		if (checking_figures.size() == 1)
 		{
-			guarding_figures.push_back((*iter));
+		for (auto iter = checking_figures.begin(); iter != checking_figures.end(); ++iter)
+			{
+				get_possible_checking_figures.push_back((*iter));
+			}	
 		}
 		board.swap_board(board_backup.get_board());
 	}
-	return guarding_figures;
+	return get_possible_checking_figures;
 }
 
 
@@ -142,6 +146,49 @@ std::list<std::vector<int>> Game::get_final_moves_for_figure(Figure* my_figure)
 	auto allowed_player_moves = get_allowed_moves();
 	auto figure_positions = board.get_free_positions_for_figure(my_figure);
 	std::list<std::vector<int>> final_positions = {};
+
+
+
+
+
+
+	auto possible_checking_figures = get_possible_checking_figures();
+	for (auto iter = possible_checking_figures.begin(); iter != possible_checking_figures.end(); ++iter)
+	{
+		std::vector<int> checking_position = (*iter)->get_position();
+		std::vector<int> king_position = get_player().get_king()->get_position();
+		auto positions_beetween = get_positions_beetween(checking_position, king_position);
+		std::vector<Figure*> figures_between;
+		for (auto itr = positions_beetween.begin(); itr != positions_beetween.end(); ++itr)
+		{
+			if (board.get_figure((*itr)[0], (*itr)[1]) != nullptr)
+			{
+				figures_between.push_back(board.get_figure((*itr)[0], (*itr)[1]));
+			}
+		}
+		if (figures_between.size() == 1 && figures_between[0] == my_figure)
+		{
+			for (auto itr = positions_beetween.begin(); itr != positions_beetween.end(); ++itr)
+			{
+				if (std::find(figure_positions.begin(), figure_positions.end(), (*itr)) != figure_positions.end())
+				{
+					final_positions.push_back((*itr));
+				}
+			}
+
+			if (std::find(figure_positions.begin(), figure_positions.end(), (*iter)->get_position()) != figure_positions.end())
+			{
+				final_positions.push_back((*iter)->get_position());
+			}
+			return final_positions;
+		}
+	}
+
+
+
+
+
+
 	if (my_figure->get_type() != "K")
 	{
 		if (checking_figures.size() > 1)
