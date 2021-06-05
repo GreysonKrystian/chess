@@ -70,6 +70,12 @@ Figure* Board::get_figure(int x, int y) const
 	return board[x][y];
 }
 
+void Board::swap_board(std::array<std::array < Figure*, 8>, 8> const& new_board)
+{
+	board = new_board;
+
+}
+
 
 std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figure) const
 {
