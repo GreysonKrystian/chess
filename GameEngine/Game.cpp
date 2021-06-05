@@ -49,6 +49,25 @@ Player Game::get_enemy_player()const
 	}
 }
 
+std::vector<Figure*> Game::get_guarding_figures()
+{
+	std::vector<Figure*> guarding_figures;
+	Player current_player = get_player();
+	Board& board_backup = board;
+	std::list<Figure*> figures_to_check = current_player.get_player_figures();
+	for (auto iter = figures_to_check.begin(); iter != figures_to_check.end(); ++iter)
+	{
+		auto temp_board = board.get_board();
+		temp_board[(*iter)->get_position()[0]][(*iter)->get_position()[1]] = nullptr;
+		board.swap_board(temp_board);
+		if (get_checking_figures().size() == 1)
+		{
+			guarding_figures.push_back((*iter));
+		}
+	}
+	return guarding_figures;
+}
+
 
 
 void Game::make_move(Figure* current_figure, int new_x, int new_y)
