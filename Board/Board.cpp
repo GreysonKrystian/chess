@@ -182,7 +182,6 @@ std::list<std::vector<int>> Board::get_strike_positions_for_pawn(Figure* my_pawn
 
 
 
-
 std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> const& current_fig_pos, std::vector<int> const& blocking_fig_pos) const
 {
 	int cur_x = current_fig_pos[0];

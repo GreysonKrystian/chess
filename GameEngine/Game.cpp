@@ -85,21 +85,19 @@ void Game::capture_figure(int x, int y)
 
 bool Game::check_win_condition(Player const& current_player, Player const& checked_player) const
 {
-	auto king_positions = restrict_king_positions(current_player, checked_player);
+	auto king_positions = restrict_king_positions();
 	if ((get_allowed_moves().size() == 0) && (king_positions.size() == 0))
 	{
 		return true;
 	}
 	return false;
-
-
 }
+
 
 std::list<Figure*> Game::get_checking_figures() const
 {
 	Player cur_player = get_player();
 	Player ene_player = get_enemy_player();
-
 
 	std::list<Figure*> checking_figures;
 
@@ -118,143 +116,86 @@ std::list<Figure*> Game::get_checking_figures() const
 	return checking_figures;
 }
 
-std::list<std::vector<int>> Game::get_allowed_moves() const //zwraca możliwe ruchy dla szachowanego gracza
+std::list<std::vector<int>> Game::get_final_moves_for_figure(Figure* my_figure) const
 {
-	std::list<std::vector<int>> allowed_positions;
-
-	std::list<Figure*> checking_figures = get_checking_figures();
-	std::vector<int> king_pos = (get_player().get_king())->get_position();
-	int king_x = king_pos[0];
-	int king_y = king_pos[1];
-	for (auto itr = checking_figures.begin(); itr != checking_figures.end(); ++itr)
+	auto checking_figures = get_checking_figures();
+	auto allowed_player_moves = get_allowed_moves();
+	auto figure_positions = board.get_free_positions_for_figure(my_figure);
+	std::list<std::vector<int>> final_positions = {};
+	if (my_figure->get_type() != "K")
 	{
-		std::vector<int> checking_pos = (*itr)->get_position();
-
-		int checking_x = checking_pos[0];
-		int checking_y = checking_pos[1];
-
-
-		if ((king_x == checking_x) && (checking_y > king_y)) //pion w górę
+		if (checking_figures.size() > 1)
 		{
-			king_y--;
-			while (king_y > checking_y)
-			{
-				std::vector<int> point = { king_x, king_y };
-				allowed_positions.push_back(point);
-				king_y--;
-			}
+			return final_positions;
 		}
 
-		if ((king_x == checking_x) && (checking_y < king_y)) //pion w dół
+		if (allowed_player_moves.size() != 0)
 		{
-			king_y++;
-			while (king_y < checking_y)
+			for (auto itr = allowed_player_moves.begin(); itr != allowed_player_moves.end(); ++itr)
 			{
-				std::vector<int> point = { king_x, king_y };
-				allowed_positions.push_back(point);
-				king_y++;
+				if (std::find(figure_positions.begin(), figure_positions.end(), *itr) != figure_positions.end())
+				{
+					final_positions.push_back(*itr);
+				}
 			}
+			return final_positions;
 		}
-
-		if ((checking_x > king_x) && (checking_y == king_y)) //poziom w prawo
+		else
 		{
-			king_x++;
-			while (king_x < checking_x)
-			{
-				std::vector<int> point = { king_x, king_y };
-				allowed_positions.push_back(point);
-				king_x++;
-			}
-		}
-
-		if ((checking_x < king_x) && (checking_y == king_y)) //poziom w lewo
-		{
-			king_x--;
-			while (king_x > checking_x)
-			{
-				std::vector<int> point = { king_x, king_y };
-				allowed_positions.push_back(point);
-				king_x--;
-			}
-		}
-
-		if ((checking_x > king_x) && (checking_y < king_y)) // prawy ukos w górę
-		{
-			king_x++;
-			king_y--;
-			while (king_x < checking_x && king_y > checking_y)
-			{
-				std::vector<int> point = { king_x, king_y };
-				allowed_positions.push_back(point);
-				king_x++;
-				king_y--;
-			}
-		}
-
-		if ((checking_x > king_x) && (checking_y > king_y)) // prawy ukos w dół
-		{
-			king_x++;
-			king_y++;
-			while (king_x < checking_x && king_y < checking_y)
-			{
-				std::vector<int> point = { king_x, king_y };
-				allowed_positions.push_back(point);
-				king_x++;
-				king_y++;
-			}
-		}
-
-		if ((checking_x < king_x) && (checking_y < king_y)) // lewy ukos w górę
-		{
-			king_x--;
-			king_y--;
-			while (king_x > checking_x && king_y > checking_y)
-			{
-				std::vector<int> point = { king_x, king_y };
-				allowed_positions.push_back(point);
-				king_x--;
-				king_y--;
-			}
-		}
-
-		if ((checking_x < king_x) && (checking_y > king_y)) // lewy ukos w dół
-		{
-			king_x--;
-			king_y++;
-			while (king_x > checking_x && king_y < checking_y)
-			{
-				std::vector<int> point = { king_x, king_y };
-				allowed_positions.push_back(point);
-				king_x--;
-				king_y++;
-			}
+			return figure_positions;
 		}
 
 	}
-	return allowed_positions;
+	else
+	{
+		final_positions = restrict_king_positions();
+
+		return final_positions;
+	}
 }
 
 
-std::list<std::vector<int>> Game::restrict_king_positions(Player const& current_player, Player const& checked_player) const //zrwaca listę pól na które może ruszyć się król, ze względu na przeciwne figury // przyjmuje grasza szachującego
+std::list<std::vector<int>> Game::get_allowed_moves() const //zwraca możliwe ruchy dla szachowanego gracza
 {
-	Player currrent_player = get_player();
+
+	std::list<Figure*> checking_figures = get_checking_figures(); // figury przeciwne szachujące
+	std::vector<int> king_pos = (get_player().get_king())->get_position(); // król szachowany
+	std::list<std::vector<int>> allowed_moves = {};
+
+	if(checking_figures.size() == 1)
+	{
+		std::vector<int> checking_pos = (*(checking_figures.begin()))->get_position();
+		auto positions_between = get_positions_beetween(checking_pos, king_pos);
+		allowed_moves.insert(allowed_moves.end(), positions_between.begin(), positions_between.end());
+	}
+	return allowed_moves;
+}
+
+
+std::list<std::vector<int>> Game::restrict_king_positions() const //zrwaca listę pól na które może ruszyć się król, ze względu na przeciwne figury // przyjmuje grasza szachującego
+{
+	Player checked_player = get_player();
 	Player enem_player = get_enemy_player();
 
 
 	Figure* king = checked_player.get_king();
 	std::list<std::vector<int>> king_free_positions = board.get_free_positions_for_figure(king);
 	
-	//std::list<Figure*> enemy_figures = checked_player.get_player_figures();
+	std::list<Figure*> enemy_figures = enem_player.get_player_figures();
 	
-	//for (auto itr = enemy_figures.begin(); itr != enemy_figures.end(); ++itr)
-	//{
-	//	std::list<std::vector<int>> attacking_positions = (*itr)->get_possible_positions();
-	//	for (auto itr_attack = attacking_positions.begin(); itr_attack != attacking_positions.end(); ++itr_attack)
-	//	{
-	//		auto itr_del = std::find(king_free_positions.begin(), king_free_positions.end(), *itr_attack);
-	//		king_free_positions.erase(itr_del);
-	//	}
-	//}
+	for (auto itr = enemy_figures.begin(); itr != enemy_figures.end(); ++itr) // usuwa pozycje na któr może się ruszyć król, gdzy przeciwna figura ma bicie na to pole
+	{
+		std::list<std::vector<int>> attacking_positions = (*itr)->get_possible_positions();
+		for (auto itr_attack = attacking_positions.begin(); itr_attack != attacking_positions.end(); ++itr_attack)
+		{
+			auto itr_del = std::find(king_free_positions.begin(), king_free_positions.end(), *itr_attack);
+			if (itr_del != king_free_positions.end())
+			{
+			king_free_positions.remove(*itr_del);
+			}
+		}
+	}
+
 	auto checking_figures = get_checking_figures();
 	auto temp_board = board.get_board();
 	temp_board[king->get_position()[0]][king->get_position()[1]] = nullptr;
@@ -264,7 +205,11 @@ std::list<std::vector<int>> Game::restrict_king_positions(Player const& current_
 		for (auto itr_attack = attacking_positions.begin(); itr_attack != attacking_positions.end(); ++itr_attack)
 		{
 			auto itr_del = std::find(king_free_positions.begin(), king_free_positions.end(), *itr_attack);
-			king_free_positions.erase(itr_del);
+			
+			if (itr_del != king_free_positions.end())
+			{
+				king_free_positions.remove(*itr_del);
+			}
 		}
 	}
 	return king_free_positions;
@@ -447,6 +392,118 @@ std::vector<int> Game::do_castling(int new_x, int new_y)
 		}
 		return rook_coords;
 }
+
+
+std::list<std::vector<int>> Game::get_positions_beetween(std::vector<int> const& checking_pos, std::vector<int> const& king_pos) const
+{
+	std::list<std::vector<int>> positions_between;
+
+	int king_x = king_pos[0];
+	int king_y = king_pos[1];
+	int checking_x = checking_pos[0];
+	int checking_y = checking_pos[1];
+
+
+	if ((king_x == checking_x) && (checking_y < king_y)) //pion w górę
+	{
+		king_y--;
+		while (king_y > checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			positions_between.push_back(point);
+			king_y--;
+		}
+	}
+
+	if ((king_x == checking_x) && (checking_y > king_y)) //pion w dół
+	{
+		king_y++;
+		while (king_y < checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			positions_between.push_back(point);
+			king_y++;
+		}
+	}
+
+	if ((checking_x > king_x) && (checking_y == king_y)) //poziom w prawo
+	{
+		king_x++;
+		while (king_x < checking_x)
+		{
+			std::vector<int> point = { king_x, king_y };
+			positions_between.push_back(point);
+			king_x++;
+		}
+	}
+
+	if ((checking_x < king_x) && (checking_y == king_y)) //poziom w lewo
+	{
+		king_x--;
+		while (king_x > checking_x)
+		{
+			std::vector<int> point = { king_x, king_y };
+			positions_between.push_back(point);
+			king_x--;
+		}
+	}
+
+	if ((checking_x > king_x) && (checking_y < king_y)) // prawy ukos w górę
+	{
+		king_x++;
+		king_y--;
+		while (king_x < checking_x && king_y > checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			positions_between.push_back(point);
+			king_x++;
+			king_y--;
+		}
+	}
+
+	if ((checking_x > king_x) && (checking_y > king_y)) // prawy ukos w dół
+	{
+		king_x++;
+		king_y++;
+		while (king_x < checking_x && king_y < checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			positions_between.push_back(point);
+			king_x++;
+			king_y++;
+		}
+	}
+
+	if ((checking_x < king_x) && (checking_y < king_y)) // lewy ukos w górę
+	{
+		king_x--;
+		king_y--;
+		while (king_x > checking_x && king_y > checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			positions_between.push_back(point);
+			king_x--;
+			king_y--;
+		}
+	}
+
+	if ((checking_x < king_x) && (checking_y > king_y)) // lewy ukos w dół
+	{
+		king_x--;
+		king_y++;
+		while (king_x > checking_x && king_y < checking_y)
+		{
+			std::vector<int> point = { king_x, king_y };
+			positions_between.push_back(point);
+			king_x--;
+			king_y++;
+		}
+	}
+
+	return positions_between;
+}
+
+
 ///////////////////////////////////////// PLAYER /////////////////////////////////////////////
 
 void Player::set_player_figures(std::list<Figure*> const& figures_list)

@@ -23,11 +23,12 @@ private:
 	Player player_black;
 	Board board; // było public
 	bool is_white_turn;
-	std::list<std::vector<int>> restrict_king_positions(Player const& current_player, Player const& checked_player) const;
+	std::list<std::vector<int>> restrict_king_positions() const;
 	bool castling_left_conditions(int pos_x, int pos_y) const;
 	bool castling_right_conditions(int pos_x, int pos_y) const;
 	std::list<Figure*> get_checking_figures() const;
 	void create_figures();
+	std::list<std::vector<int>> get_positions_beetween(std::vector<int> const& checking_pos, std::vector<int> const& king_pos) const;
 
 public:
 	Game();
@@ -44,4 +45,6 @@ public:
 	std::list<std::vector<int>> get_allowed_moves() const; //zwraca możliwe ruchy dla szachowanego gracza
 	Player get_player()const; // zwraca gracza który ma teraz turę
 	Player get_enemy_player()const; // zwraca gracza który nie ma tury  
+
+	std::list<std::vector<int>> get_final_moves_for_figure(Figure*) const;
 };

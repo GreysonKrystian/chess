@@ -118,8 +118,8 @@ void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
         hide_possible_moves_for_figure(clicked_figure); // usuniêcie podœwietlenia poprzedniej figury
     }
     
-    //auto pos = figure->get_possible_positions();
-    auto pos = game.get_board().get_free_positions_for_figure(figure);
+    auto pos = game.get_final_moves_for_figure(figure);
+    
     if (figure->get_type() == "K")
     {
         auto castling = game.get_castling_positions();
@@ -130,6 +130,8 @@ void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
         auto cur_pos = *it;
         fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: rgb(44, 163, 44); border: 1px solid black");
     }
+    
+
     clicked_figure = figure;
     make_move();
 
