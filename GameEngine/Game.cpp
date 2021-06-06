@@ -107,15 +107,15 @@ void Game::capture_figure(int x, int y)
 	//delete captured;
 }
 
-//bool Game::check_win_condition(Player const& current_player, Player const& checked_player) const
-//{
-//	auto king_positions = restrict_king_positions();
-//	if ((get_allowed_moves().size() == 0) && (king_positions.size() == 0))
-//	{
-//		return true;
-//	}
-//	return false;
-//}
+bool Game::check_win_condition()
+{
+	auto king_positions = get_final_moves_for_figure(get_player().get_king());
+	if ((get_allowed_moves().size() == 0) && (king_positions.size() == 0))
+	{
+		return true;
+	}
+	return false;
+}
 
 
 std::list<Figure*> Game::get_checking_figures() const
@@ -235,6 +235,7 @@ std::list<std::vector<int>> Game::get_allowed_moves() const //zwraca możliwe ru
 		std::vector<int> checking_pos = (*(checking_figures.begin()))->get_position();
 		auto positions_between = get_positions_beetween(checking_pos, king_pos);
 		allowed_moves.insert(allowed_moves.end(), positions_between.begin(), positions_between.end());
+		allowed_moves.push_back(checking_pos);
 	}
 	return allowed_moves;
 }
@@ -284,7 +285,7 @@ std::list<std::vector<int>> Game::restrict_king_positions() //zrwaca listę pól
 	Board backup_board = board;
 	int backup_kin_x = king->get_position()[0];
 	int backup_kin_y = king->get_position()[1];
-
+	bool backup_first_move_status = king->get_first_move();
 
 	std::list<std::vector<int>> final_positions = king_free_positions;
 
@@ -302,10 +303,13 @@ std::list<std::vector<int>> Game::restrict_king_positions() //zrwaca listę pól
 				final_positions.remove(*itr);
 			}
 		}
-	}
+	}	
 	board.move_figure(king, backup_kin_x, backup_kin_y);
+	if (backup_first_move_status == true)
+	{
+		king->set_first_move();
+	}
 	board.swap_board(backup_board.get_board());
-
 	return final_positions;
 }
 
@@ -397,17 +401,18 @@ std::list<std::vector<int>> Game::get_castling_positions() const
 		pos_y = 7;
 	}
 	std::list<std::vector<int>> castling_positions;
-
-	if ((castling_left_conditions(pos_x, pos_y) == true) && (board.get_figure(pos_x - 1, pos_y) == nullptr) && (board.get_figure(pos_x - 2, pos_y) == nullptr)
-		&& board.get_figure(pos_x - 3, pos_y) == nullptr)
+	if(get_player().get_king()->get_first_move() == true)
 	{
-		castling_positions.push_back({ pos_x - 2, pos_y });
+		if ((castling_left_conditions(pos_x, pos_y) == true) && (board.get_figure(pos_x - 1, pos_y) == nullptr) && (board.get_figure(pos_x - 2, pos_y) == nullptr)
+			&& board.get_figure(pos_x - 3, pos_y) == nullptr)
+		{
+			castling_positions.push_back({ pos_x - 2, pos_y });
+		}
+		if ((castling_right_conditions(pos_x, pos_y) == true) && (board.get_figure(pos_x + 1, pos_y)) == nullptr && (board.get_figure(pos_x + 2, pos_y) == nullptr))
+		{
+			castling_positions.push_back({ pos_x + 2, pos_y });
+		}
 	}
-	if ((castling_right_conditions(pos_x, pos_y) == true) && (board.get_figure(pos_x + 1, pos_y)) == nullptr && (board.get_figure(pos_x + 2, pos_y) == nullptr))
-	{
-		castling_positions.push_back({ pos_x + 2, pos_y });
-	}
-
 	return castling_positions;
 }
 

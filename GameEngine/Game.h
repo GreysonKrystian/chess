@@ -26,15 +26,15 @@ private:
 	std::list<std::vector<int>> restrict_king_positions();
 	bool castling_left_conditions(int pos_x, int pos_y) const;
 	bool castling_right_conditions(int pos_x, int pos_y) const;
-	std::list<Figure*> get_checking_figures() const;
 	void create_figures();
 	std::list<std::vector<int>> get_positions_beetween(std::vector<int> const& checking_pos, std::vector<int> const& king_pos) const;
 
 public:
+	std::list<Figure*> get_checking_figures() const;
 	Game();
 	~Game();
 	void capture_figure(int x, int y);
-	bool check_win_condition(Player const& current_player, Player const& checked_player) const;
+	bool check_win_condition();
 	void change_turn();
 	bool check_promote_pawn(Figure* pawn);
 	std::vector<int> do_castling(int new_x, int new_y);

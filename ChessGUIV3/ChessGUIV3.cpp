@@ -120,7 +120,7 @@ void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
     
     auto pos = game.get_final_moves_for_figure(figure);
     
-    if (figure->get_type() == "K")
+    if (figure->get_type() == "K" && game.get_checking_figures().size() == 0)
     {
         auto castling = game.get_castling_positions();
         pos.insert(pos.end(), castling.begin(), castling.end());
@@ -164,7 +164,7 @@ void ChessGUIV3::connect_all()
 void ChessGUIV3::hide_possible_moves_for_figure(Figure* figure)
 {
     auto pos = game.get_board().get_free_positions_for_figure(figure);
-    if (figure->get_type() == "K")
+    if (figure->get_type() == "K" && game.get_checking_figures().size() == 0)
     {
         auto castling = game.get_castling_positions();
         pos.insert(pos.end(), castling.begin(), castling.end());
@@ -187,7 +187,7 @@ void ChessGUIV3::hide_possible_moves_for_figure(Figure* figure)
 void ChessGUIV3::make_move()
 {
     auto moves_to_choose = game.get_final_moves_for_figure(clicked_figure);
-    if (clicked_figure->get_type() == "K")
+    if (clicked_figure->get_type() == "K" && game.get_checking_figures().size() == 0)
     {
         auto castling = game.get_castling_positions();
         moves_to_choose.insert(moves_to_choose.end(), castling.begin(), castling.end());
@@ -225,6 +225,10 @@ void ChessGUIV3::make_move()
                             clicked_figure = game.get_board().get_figure(x, y);
                             fields[x][y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
                         }
+                    }
+                    if (game.check_win_condition())
+                    {
+   
                     }
                     game.change_turn();
                     display_whose_turn();

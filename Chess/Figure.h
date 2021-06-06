@@ -20,4 +20,5 @@ public:
 	std::string get_type() const;
 	void change_first_move_status();
 	bool get_first_move() const;
+	void set_first_move();
 };

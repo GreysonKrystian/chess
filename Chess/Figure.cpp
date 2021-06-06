@@ -33,3 +33,9 @@ bool Figure::get_first_move() const
 {
 	return first_move;
 }
+
+void Figure::set_first_move()
+{
+	first_move = true;
+}
+

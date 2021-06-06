@@ -51,10 +51,6 @@ void Board::set_starting_postions(std::list < Figure*> const& figure_list)
 void Board::move_figure(Figure* my_figure, int x, int y)
 {
 	std::vector<int> old_pos = my_figure->get_position();
-	//if (my_figure->get_type() == "K" )
-	//{
-	// zrob roszade
-	//}
 	if (my_figure->get_first_move() == true)
 	{
 		my_figure->change_first_move_status();
