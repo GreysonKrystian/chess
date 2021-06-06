@@ -232,9 +232,9 @@ void ChessGUIV3::make_move()
                     {
                         ui.stackedWidget->setCurrentIndex(2);
                         if (game.get_current_player())
-                            ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!");
+                            ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!");
                         else
-                            ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!!");
+                            ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!!");
 
                     }
                     display_whose_turn();
