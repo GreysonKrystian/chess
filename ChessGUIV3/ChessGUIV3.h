@@ -8,6 +8,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_ChessGUIV3.h"
 #include "../GameEngine/Game.h"
+#include <Windows.h>
 
 class ChessGUIV3 : public QMainWindow
 {

@@ -92,7 +92,7 @@ QIcon ChessGUIV3::choose_figure(std::string figure_type, int color)
         if (figure_type == "Q")
             return WQueen;
     }
-
+    return QIcon();
 }
 
 void ChessGUIV3::setup_figures() // dodaje ikony poczatkowe

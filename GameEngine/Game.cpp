@@ -151,39 +151,40 @@ std::list<std::vector<int>> Game::get_final_moves_for_figure(Figure* my_figure)
 
 
 
-
-	auto possible_checking_figures = get_possible_checking_figures();
-	for (auto iter = possible_checking_figures.begin(); iter != possible_checking_figures.end(); ++iter)
+	if (checking_figures.size() == 0)
 	{
-		std::vector<int> checking_position = (*iter)->get_position();
-		std::vector<int> king_position = get_player().get_king()->get_position();
-		auto positions_beetween = get_positions_beetween(checking_position, king_position);
-		std::vector<Figure*> figures_between;
-		for (auto itr = positions_beetween.begin(); itr != positions_beetween.end(); ++itr)
+		auto possible_checking_figures = get_possible_checking_figures();
+		for (auto iter = possible_checking_figures.begin(); iter != possible_checking_figures.end(); ++iter)
 		{
-			if (board.get_figure((*itr)[0], (*itr)[1]) != nullptr)
-			{
-				figures_between.push_back(board.get_figure((*itr)[0], (*itr)[1]));
-			}
-		}
-		if (figures_between.size() == 1 && figures_between[0] == my_figure)
-		{
+			std::vector<int> checking_position = (*iter)->get_position();
+			std::vector<int> king_position = get_player().get_king()->get_position();
+			auto positions_beetween = get_positions_beetween(checking_position, king_position);
+			std::vector<Figure*> figures_between;
 			for (auto itr = positions_beetween.begin(); itr != positions_beetween.end(); ++itr)
 			{
-				if (std::find(figure_positions.begin(), figure_positions.end(), (*itr)) != figure_positions.end())
+				if (board.get_figure((*itr)[0], (*itr)[1]) != nullptr)
 				{
-					final_positions.push_back((*itr));
+					figures_between.push_back(board.get_figure((*itr)[0], (*itr)[1]));
 				}
 			}
-
-			if (std::find(figure_positions.begin(), figure_positions.end(), (*iter)->get_position()) != figure_positions.end())
+			if (figures_between.size() == 1 && figures_between[0] == my_figure)
 			{
-				final_positions.push_back((*iter)->get_position());
+				for (auto itr = positions_beetween.begin(); itr != positions_beetween.end(); ++itr)
+				{
+					if (std::find(figure_positions.begin(), figure_positions.end(), (*itr)) != figure_positions.end())
+					{
+						final_positions.push_back((*itr));
+					}
+				}
+
+				if (std::find(figure_positions.begin(), figure_positions.end(), (*iter)->get_position()) != figure_positions.end())
+				{
+					final_positions.push_back((*iter)->get_position());
+				}
+				return final_positions;
 			}
-			return final_positions;
 		}
 	}
-
 
 
 
