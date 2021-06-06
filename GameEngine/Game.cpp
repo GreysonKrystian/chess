@@ -110,7 +110,7 @@ void Game::capture_figure(int x, int y)
 bool Game::check_win_condition()
 {
 	auto king_positions = get_final_moves_for_figure(get_player().get_king());
-	if ((get_allowed_moves().size() == 0) && (king_positions.size() == 0))
+	if ((get_allowed_moves().size() == 0) && (king_positions.size() == 0) && (get_checking_figures().size() > 0))
 	{
 		return true;
 	}

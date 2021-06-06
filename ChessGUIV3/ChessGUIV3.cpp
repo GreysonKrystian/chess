@@ -226,16 +226,23 @@ void ChessGUIV3::make_move()
                             fields[x][y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
                         }
                     }
+                    
+                    game.change_turn();
                     if (game.check_win_condition())
                     {
-   
+                        ui.stackedWidget->setCurrentIndex(2);
+                        if (game.get_current_player())
+                            ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!");
+                        else
+                            ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!!");
+
                     }
-                    game.change_turn();
                     display_whose_turn();
                     disconnect_all();
                     current_turn();
                     });
     }
+
 }
 
 void ChessGUIV3::display_whose_turn()
