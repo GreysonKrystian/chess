@@ -103,6 +103,24 @@ void Game::capture_figure(int x, int y)
 	//delete captured;
 }
 
+bool Game::check_stalemate_condition()
+{
+	auto enemy_figures = get_player().get_player_figures();
+	if (get_checking_figures().size() == 0)
+	{
+		for (auto itr_fig = enemy_figures.begin(); itr_fig != enemy_figures.end(); ++itr_fig)
+		{
+			if (get_final_moves_for_figure((*itr_fig)).size() != 0)
+			{
+				return false;
+			}
+
+		}
+		return true;
+	}
+	return false;
+}
+
 bool Game::check_win_condition()
 {
 	//auto king_positions = get_final_moves_for_figure(get_player().get_king());

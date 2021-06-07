@@ -34,6 +34,7 @@ public:
 	Game();
 	~Game();
 	void capture_figure(int x, int y);
+	bool check_stalemate_condition();
 	bool check_win_condition();
 	void change_turn();
 	bool check_promote_pawn(Figure* pawn);

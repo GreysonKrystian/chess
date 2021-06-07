@@ -184,6 +184,9 @@ void ChessGUIV3::hide_possible_moves_for_figure(Figure* figure)
         }
 
     }
+    disconnect_all();
+    connect_all();
+
 }
 
 void ChessGUIV3::make_move()
@@ -234,9 +237,13 @@ void ChessGUIV3::make_move()
                             Sleep(100);
                         }
                     }
-                    
                     game.change_turn();
-                    if (game.check_win_condition())
+                    if (game.check_stalemate_condition())
+                    {
+                        ui.display_win->setText("PAT");
+                        ui.stackedWidget->setCurrentIndex(2);
+                    }
+                    else if (game.check_win_condition())
                     {
                         if (game.get_current_player())
                             ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!");
