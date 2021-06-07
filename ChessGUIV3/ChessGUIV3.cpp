@@ -1,5 +1,6 @@
 #include "ChessGUIV3.h"
 #include <QMovie>
+#include <Windows.h>
 
 ChessGUIV3::ChessGUIV3(QWidget *parent)
     : QMainWindow(parent)
@@ -202,7 +203,9 @@ void ChessGUIV3::make_move()
 
         connect(fields[x][y], &QPushButton::clicked, this, [=]()
                     {fields[x][y]->setIcon(choose_figure(clicked_figure->get_type(), clicked_figure->get_color()));
+                    Sleep(100);
                     fields[x_clicked][y_clicked]->setIcon(QIcon());
+                    Sleep(100);
                     hide_possible_moves_for_figure(clicked_figure);
                     if (clicked_figure->get_type() == "K")
                     {
@@ -212,8 +215,10 @@ void ChessGUIV3::make_move()
                             if ((x == (*iter)[0]) && (y == (*iter)[1]))
                             {
                                 auto rook_coords = game.do_castling(x, y);
+                                Sleep(100);
                                 fields[rook_coords[2]][rook_coords[3]]->setIcon(choose_figure("R", clicked_figure->get_color()));
                                 fields[rook_coords[0]][rook_coords[1]]->setIcon(QIcon());
+                                Sleep(100);
                             }
                         }
                     }
@@ -223,7 +228,9 @@ void ChessGUIV3::make_move()
                         if (game.check_promote_pawn(clicked_figure) == true)
                         {
                             clicked_figure = game.get_board().get_figure(x, y);
+                            Sleep(100);
                             fields[x][y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
+                            Sleep(100);
                         }
                     }
                     
@@ -231,10 +238,13 @@ void ChessGUIV3::make_move()
                     if (game.check_win_condition())
                     {
                         ui.stackedWidget->setCurrentIndex(2);
+                        Sleep(4000);
                         if (game.get_current_player())
                             ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!");
                         else
                             ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!!");
+                        ui.stackedWidget->setCurrentIndex(0);
+
 
                     }
                     display_whose_turn();
