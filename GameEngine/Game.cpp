@@ -87,10 +87,6 @@ void Game::make_move(Figure* current_figure, int new_x, int new_y)
 	{
 		board.move_figure(current_figure, new_x, new_y);
 	}
-
-	/*int x = current_figure->get_position()[0];
-	int y = current_figure->get_position()[1];
-	Game.get_board().move_figure(current_figure, new_x, new_y);*/
 }
 
 void Game::capture_figure(int x, int y)

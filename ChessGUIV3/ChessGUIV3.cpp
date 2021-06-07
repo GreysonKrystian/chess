@@ -2,6 +2,7 @@
 #include <QMovie>
 #include <Windows.h>
 
+
 ChessGUIV3::ChessGUIV3(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -237,13 +238,11 @@ void ChessGUIV3::make_move()
                     game.change_turn();
                     if (game.check_win_condition())
                     {
-                        ui.stackedWidget->setCurrentIndex(2);
-                        Sleep(4000);
                         if (game.get_current_player())
                             ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!");
                         else
                             ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!!");
-                        ui.stackedWidget->setCurrentIndex(0);
+                        ui.stackedWidget->setCurrentIndex(2);
 
 
                     }
