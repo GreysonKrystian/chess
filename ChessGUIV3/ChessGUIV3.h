@@ -46,4 +46,5 @@ private:
     void disconnect_all();
     void connect_all();
     void display_whose_turn();
+    void write_record(Figure*, int x, int y);
 };

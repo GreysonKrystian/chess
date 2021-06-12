@@ -227,6 +227,7 @@ void ChessGUIV3::make_move()
                     {
                         if (game.check_promote_pawn(clicked_figure) == true)
                         {
+                            ui.records->insertPlainText(" (promocja piona)");
                             clicked_figure = game.get_board().get_figure(x, y);
                             fields[x][y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
                         }
@@ -306,4 +307,11 @@ void ChessGUIV3::display_whose_turn()
     {
         ui.turn->setText("Tura Czarnych");
     }
+}
+
+void ChessGUIV3::write_record(Figure* clicked_figure, int new_x, int new_y)
+{
+    auto text = game.get_record(clicked_figure, new_x, new_y);
+
+    ui.records->insertPlainText(text.c_str());
 }
