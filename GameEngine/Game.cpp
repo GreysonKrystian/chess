@@ -622,6 +622,83 @@ std::list<std::vector<int>> Game::get_positions_beetween(std::vector<int> const&
 }
 
 
+std::string Game::get_record(Figure* my_figure, int new_x, int new_y) const
+{
+	std::string text;
+	if (get_current_player())
+		text += "[B]: ";
+	else
+		text += "[C]: ";
+	
+	text += my_figure->get_type();
+	text += " ";
+	text += convert_x_coordinate(my_figure->get_position()[0]);
+	text += convert_y_coordinate(my_figure->get_position()[1]);
+	text += "-->";
+	text += convert_x_coordinate(new_x);
+	text += convert_y_coordinate(new_y);
+
+	if (board.get_figure(new_x, new_y) != nullptr)
+		text += " (bicie)";
+
+	if ((abs(my_figure->get_position()[0] - new_x) > 1) && (my_figure->get_type() == "K"))
+		text += " (roszada)";
+	text += "\n";
+	return text;
+}
+
+std::string Game::convert_x_coordinate(int x) const
+{
+	std::string text;
+	switch (x)
+	{
+	case 0: text += "A";
+		break;
+	case 1: text += "B";
+		break;
+	case 2: text += "C";
+		break;
+	case 3: text += "D";
+		break;
+	case 4: text += "E";
+		break;
+	case 5: text += "F";
+		break;
+	case 6: text += "G";
+		break;
+	case 7: text += "H";
+		break;
+	}
+	return text;
+}
+
+
+std::string Game::convert_y_coordinate(int y) const
+{
+	std::string text;
+	switch (y)
+	{
+	case 0: text += "8";
+		break;
+	case 1: text += "7";
+		break;
+	case 2: text += "6";
+		break;
+	case 3: text += "5";
+		break;
+	case 4: text += "4";
+		break;
+	case 5: text += "3";
+		break;
+	case 6: text += "2";
+		break;
+	case 7: text += "1";
+		break;
+	}
+	return text;
+}
+
+
 ///////////////////////////////////////// PLAYER /////////////////////////////////////////////
 
 void Player::set_player_figures(std::list<Figure*> const& figures_list)
