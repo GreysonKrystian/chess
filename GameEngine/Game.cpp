@@ -272,7 +272,11 @@ std::list<std::vector<int>> Game::restrict_king_positions() //zrwaca listę pól
 	
 	for (auto itr = enemy_figures.begin(); itr != enemy_figures.end(); ++itr) // usuwa pozycje na któr może się ruszyć król, gdzy przeciwna figura ma bicie na to pole
 	{
-		std::list<std::vector<int>> attacking_positions = board.get_free_positions_for_figure(*itr);
+		std::list<std::vector<int>> attacking_positions;
+		if ((*itr)->get_type() == "P")
+			 attacking_positions = board.get_strike_positions_for_pawn(*itr);
+		else
+			 attacking_positions = board.get_free_positions_for_figure(*itr);
 		for (auto itr_attack = attacking_positions.begin(); itr_attack != attacking_positions.end(); ++itr_attack)
 		{
 			auto itr_del = std::find(king_free_positions.begin(), king_free_positions.end(), *itr_attack);

@@ -60,6 +60,9 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
     
     connect_all();
     display_whose_turn();
+    ui.records->clear();
+    ui.records->insertPlainText("Nowa Partia");
+    ui.records->insertPlainText("\n");
 }
 
 QIcon ChessGUIV3::choose_figure(std::string figure_type, int color)
@@ -222,6 +225,7 @@ void ChessGUIV3::make_move()
                             }
                         }
                     }
+                    write_record(clicked_figure, x, y);
                     game.make_move(clicked_figure, x, y);
                     if (clicked_figure->get_type() == "P")
                     {
