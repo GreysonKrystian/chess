@@ -29,11 +29,11 @@ public:
     QIcon BQueen;
     ChessGUIV3(QWidget* parent = Q_NULLPTR);
     void setup_figures();
-    void current_turn();
 
    
 private:
     Ui::ChessGUIV3Class ui;
+    std::vector<std::vector <int>> moves_list;
     std::array<std::array <QPushButton*, 8>, 8> fields;
     Game game;
     Figure* clicked_figure = nullptr;
@@ -41,6 +41,8 @@ private:
     void show_possible_moves_for_figure(Figure* figure);
     void hide_possible_moves_for_figure(Figure* figure);
     void make_move();
+    void computer_move(int current_x, int current_y, int move_to_x, int move_to_y);
+    void show_match_history();
     void disconnect_all();
     void connect_all();
     void display_whose_turn();

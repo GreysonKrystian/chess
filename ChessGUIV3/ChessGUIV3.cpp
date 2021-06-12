@@ -204,12 +204,10 @@ void ChessGUIV3::make_move()
         int y = (*it)[1];
         int x_clicked = clicked_figure->get_position()[0];
         int y_clicked = clicked_figure->get_position()[1];
-
+        moves_list.push_back({ x_clicked, y_clicked, x, y });
         connect(fields[x][y], &QPushButton::clicked, this, [=]()
                     {fields[x][y]->setIcon(choose_figure(clicked_figure->get_type(), clicked_figure->get_color()));
-                    Sleep(100);
                     fields[x_clicked][y_clicked]->setIcon(QIcon());
-                    Sleep(100);
                     hide_possible_moves_for_figure(clicked_figure);
                     if (clicked_figure->get_type() == "K")
                     {
@@ -219,10 +217,8 @@ void ChessGUIV3::make_move()
                             if ((x == (*iter)[0]) && (y == (*iter)[1]))
                             {
                                 auto rook_coords = game.do_castling(x, y);
-                                Sleep(100);
                                 fields[rook_coords[2]][rook_coords[3]]->setIcon(choose_figure("R", clicked_figure->get_color()));
                                 fields[rook_coords[0]][rook_coords[1]]->setIcon(QIcon());
-                                Sleep(100);
                             }
                         }
                     }
@@ -232,9 +228,7 @@ void ChessGUIV3::make_move()
                         if (game.check_promote_pawn(clicked_figure) == true)
                         {
                             clicked_figure = game.get_board().get_figure(x, y);
-                            Sleep(100);
                             fields[x][y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
-                            Sleep(100);
                         }
                     }
                     game.change_turn();
@@ -255,10 +249,51 @@ void ChessGUIV3::make_move()
                     }
                     display_whose_turn();
                     disconnect_all();
-                    current_turn();
+                    connect_all();
                     });
     }
 
+}
+
+void ChessGUIV3::computer_move(int current_x, int current_y, int move_to_x, int move_to_y)
+{
+    clicked_figure = game.get_board().get_figure(current_x, current_y);
+    fields[move_to_x][move_to_y]->setIcon(choose_figure(clicked_figure->get_type(), clicked_figure->get_color()));
+    fields[current_x][current_y]->setIcon(QIcon());
+    if (clicked_figure->get_type() == "K")
+    {
+        auto castling_tiles = game.get_castling_positions();
+        for (auto iter = castling_tiles.begin(); iter != castling_tiles.end(); ++iter)
+        {
+            if ((move_to_x == (*iter)[0]) && (move_to_y == (*iter)[1]))
+            {
+                auto rook_coords = game.do_castling(move_to_x, move_to_y);
+                fields[rook_coords[2]][rook_coords[3]]->setIcon(choose_figure("R", clicked_figure->get_color()));
+                fields[rook_coords[0]][rook_coords[1]]->setIcon(QIcon());
+            }
+        }
+    }
+    if (clicked_figure->get_type() == "P")
+    {
+        if (game.check_promote_pawn(clicked_figure) == true)
+        {
+            clicked_figure = game.get_board().get_figure(move_to_x, move_to_y);
+            fields[move_to_x][move_to_y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
+        }
+    }
+    game.change_turn();
+    display_whose_turn();
+    disconnect_all();
+    connect_all();
+}
+
+void ChessGUIV3::show_match_history()
+{
+    setup_figures();
+    for (unsigned int i = 0; i < moves_list.size(); i++)
+    {
+        computer_move(moves_list[i][0], moves_list[i][1], moves_list[i][2], moves_list[i][3]);
+    }
 }
 
 void ChessGUIV3::display_whose_turn()
@@ -271,20 +306,4 @@ void ChessGUIV3::display_whose_turn()
     {
         ui.turn->setText("Tura Czarnych");
     }
-}
-
-
-void ChessGUIV3::current_turn()
-{
-    connect_all();
-   // make_move();
-    //if (game.get_current_player() == true) // jesli bialy ma ruch 
-    //{   
-    //    auto king = game.player_white().get_king();
-    //    game.player_white().get_player_figures();
-    //}
-    //else
-    //{
-
-    //}
 }
