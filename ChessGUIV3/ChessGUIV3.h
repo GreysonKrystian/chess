@@ -33,6 +33,7 @@ public:
 
 private:
     int moves_counter = 0;
+    bool playing_with_computer = false;
     Ui::ChessGUIV3Class ui;
     std::vector<std::vector <int>> moves_list;
     std::array<std::array <QPushButton*, 8>, 8> fields;

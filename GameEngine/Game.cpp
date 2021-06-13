@@ -717,6 +717,33 @@ std::string Game::convert_y_coordinate(int y) const
 	return text;
 }
 
+std::vector<int> Game::generate_random_move()
+{
+	std::vector<int> chosen_moves;
+	auto figures_list = get_player().get_player_figures();
+	srand(time(NULL));
+	int number;
+	std::list<std::vector<int>> moves;
+	std::list<Figure*>::iterator iter;
+	do
+	{
+		number = rand() % figures_list.size();
+		iter = figures_list.begin();
+		std::advance(iter, number);
+		moves = get_final_moves_for_figure(*iter);
+
+	} while (get_final_moves_for_figure(*iter).size() == 0);
+
+	chosen_moves.push_back((*iter)->get_position()[0]);
+	chosen_moves.push_back((*iter)->get_position()[1]);
+	number = rand() % moves.size();
+	auto itr2 = moves.begin();
+	std::advance(itr2, number);
+	chosen_moves.push_back((*itr2)[0]);
+	chosen_moves.push_back((*itr2)[1]);
+	return chosen_moves;
+}
+
 
 ///////////////////////////////////////// PLAYER /////////////////////////////////////////////
 

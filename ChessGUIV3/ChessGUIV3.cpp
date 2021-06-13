@@ -70,12 +70,13 @@ ChessGUIV3::ChessGUIV3(QWidget* parent)
     //ui.playbutton->setEnabled(false);
     connect(ui.playbutton, &QPushButton::clicked, this, [=]() {ui.stackedWidget->setCurrentIndex(3); });
     connect(ui.playerGameButton, &QPushButton::clicked, this, [=]() {ui.stackedWidget->setCurrentIndex(0); });
+    connect(ui.computerGameButton, &QPushButton::clicked, this, [=]() {ui.stackedWidget->setCurrentIndex(0); playing_with_computer = true; });
     connect(ui.saveButton, &QPushButton::clicked, this, [=]() {save_record(); });
     connect(ui.exitButton, &QPushButton::clicked, this, [=]() {this->close(); });
     connect(ui.exitButton2, &QPushButton::clicked, this, [=]() {this->close(); });
-    connect(ui.traceGame, &QPushButton::clicked, this, [=]() { ui.stackedWidget->setCurrentIndex(0); ui.nextMoveButton->show(); game.restart_game(); setup_figures(); });
+    connect(ui.traceGame, &QPushButton::clicked, this, [=]() { ui.stackedWidget->setCurrentIndex(0); ui.nextMoveButton->show(); game.restart_game(); setup_figures(); ui.records->clear(); });
     connect(ui.nextMoveButton, &QPushButton::clicked, this, [=]() {show_match_history(); });
-
+    
     setup_figures();
 
 
@@ -183,14 +184,22 @@ void ChessGUIV3::disconnect_all()
 
 void ChessGUIV3::connect_all()
 {
-    auto figures_to_connect = game.get_player().get_player_figures();
-    for (auto itr = figures_to_connect.begin(); itr != figures_to_connect.end(); ++itr)
+    if (playing_with_computer == true && game.get_current_player() == false )
     {
-        int x = (*itr)->get_position()[0];
-        int y = (*itr)->get_position()[1];
-        connect(fields[x][y], &QPushButton::clicked, this, [=]()
-            {show_possible_moves_for_figure(game.get_board().get_figure(x, y));
-            });
+        auto random = game.generate_random_move();
+        computer_move(random[0], random[1], random[2], random[3]);
+    }
+    else
+    {
+        auto figures_to_connect = game.get_player().get_player_figures();
+        for (auto itr = figures_to_connect.begin(); itr != figures_to_connect.end(); ++itr)
+        {
+            int x = (*itr)->get_position()[0];
+            int y = (*itr)->get_position()[1];
+            connect(fields[x][y], &QPushButton::clicked, this, [=]()
+                {show_possible_moves_for_figure(game.get_board().get_figure(x, y));
+                });
+        }
     }
 }
 
@@ -277,13 +286,13 @@ void ChessGUIV3::make_move()
         {
             if (game.get_current_player())
             {
-                ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!");
-                ui.records->insertPlainText("CZARNE WYGRYWAJA !!!!!!!");
+                ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!\n");
+                ui.records->insertPlainText("CZARNE WYGRYWAJA !!!!!!!\n");
             }
             else
             {
-                ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!!");
-                ui.records->insertPlainText("BIALE WYGRYWAJA !!!!!!!!");
+                ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!!\n");
+                ui.records->insertPlainText("BIALE WYGRYWAJA !!!!!!!!\n");
             }
             ui.stackedWidget->setCurrentIndex(2);
 
@@ -315,16 +324,40 @@ void ChessGUIV3::computer_move(int current_x, int current_y, int move_to_x, int 
             }
         }
     }
+    write_record(clicked_figure, move_to_x, move_to_y);
     if (clicked_figure->get_type() == "P")
     {
         if (game.check_promote_pawn(clicked_figure) == true)
         {
+            ui.records->insertPlainText(" (promocja piona)");
             clicked_figure = game.get_board().get_figure(move_to_x, move_to_y);
             fields[move_to_x][move_to_y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
         }
     }
+
     game.make_move(clicked_figure, move_to_x, move_to_y);
     game.change_turn();
+    if (game.check_stalemate_condition()) // zrobic z tego funkcje
+    {
+        ui.display_win->setText("PAT");
+        ui.stackedWidget->setCurrentIndex(3);
+    }
+    else if (game.check_win_condition())
+    {
+        if (game.get_current_player())
+        {
+            ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!");
+            ui.records->insertPlainText("CZARNE WYGRYWAJA !!!!!!!");
+        }
+        else
+        {
+            ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!!");
+            ui.records->insertPlainText("BIALE WYGRYWAJA !!!!!!!!");
+        }
+        ui.stackedWidget->setCurrentIndex(2);
+
+
+    }
     display_whose_turn();
     disconnect_all();
     connect_all();

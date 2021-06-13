@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "../Board/Board.h"
 #include <algorithm>
+#include <stdlib.h>
+#include <time.h>
 
 class Player
 {
@@ -31,11 +33,11 @@ private:
 	std::list<std::vector<int>> get_positions_beetween(std::vector<int> const& checking_pos, std::vector<int> const& king_pos) const;
 	std::string convert_x_coordinate(int) const;
 	std::string convert_y_coordinate(int) const;
-
 public:
 	std::list<Figure*> get_checking_figures() const;
 	Game();
 	~Game();
+	std::vector<int> generate_random_move();
 	void capture_figure(int x, int y);
 	bool check_stalemate_condition();
 	bool check_win_condition();
