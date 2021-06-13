@@ -298,9 +298,12 @@ void ChessGUIV3::make_move()
 
 
         }
-        display_whose_turn();
-        disconnect_all();
-        connect_all();
+        else
+        {
+            display_whose_turn();
+            disconnect_all();
+            connect_all();
+        }
             });
     }
 
@@ -355,12 +358,15 @@ void ChessGUIV3::computer_move(int current_x, int current_y, int move_to_x, int 
             ui.records->insertPlainText("BIALE WYGRYWAJA !!!!!!!!");
         }
         ui.stackedWidget->setCurrentIndex(2);
-
+        
 
     }
-    display_whose_turn();
-    disconnect_all();
-    connect_all();
+    else
+    {
+        display_whose_turn();
+        disconnect_all();
+        connect_all();
+    }
 }
 
 void ChessGUIV3::show_match_history()

@@ -44,12 +44,3 @@ std::list<std::vector<int>> Bishop::get_possible_positions() const
 	}
 	return all_positions;
 }
-
-//void Bishop::remove_blocked_positions()
-//{
-//	for(std::vector::iterator iter = vector.begin(); vector.end(); ++iter)
-//		{
-//			current = *iter;
-//			
-//		}
-//}
