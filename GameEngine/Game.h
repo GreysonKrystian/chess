@@ -7,12 +7,13 @@ class Player
 private:
 	std::list<Figure*> player_figures;
 public:
-	Player(){}
+	Player() {}
 	void set_player_figures(std::list<Figure*> const&);
 	std::list<Figure*> get_player_figures() const;
 	Figure* get_king() const;
 	void del_figure(Figure* fig_to_del);
 	void replace_figure(Figure* fig_to_add, Figure* current_figure);
+	void clear_player(); // usuwa figury gracza
 };
 
 
@@ -51,4 +52,5 @@ public:
 	std::vector<Figure*> get_possible_checking_figures();
 	std::list<std::vector<int>> get_final_moves_for_figure(Figure*); // zwraca ostateczne możliwe ruchy figury uwzględniająć możliwego szacha króla
 	std::string get_record(Figure*, int x, int y) const;
+	void restart_game(); //przywraca stan początkowy gry
 };

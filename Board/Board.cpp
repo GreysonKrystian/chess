@@ -16,7 +16,7 @@ Board::Board()
 
 Board::~Board()
 {
-	
+
 }
 
 std::array<std::array < Figure*, 8>, 8> Board::get_board() const
@@ -30,6 +30,17 @@ void Board::replace_figure(Figure* old_figure, Figure* new_figure)
 	int y = old_figure->get_position()[1];
 	board[x][y] = new_figure;
 	delete old_figure;
+}
+
+void Board::clear_board()
+{
+	for (auto itr_x = board.begin(); itr_x != board.end(); ++itr_x)
+	{
+		for (auto itr_y = (*itr_x).begin(); itr_y != (*itr_x).end(); ++itr_y)
+		{
+			*itr_y = nullptr;
+		}
+	}
 }
 
 void Board::set_starting_postions(std::list < Figure*> const& figure_list)
@@ -82,17 +93,17 @@ std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figu
 			occupied_positions.push_back(*itr);
 		}
 	}
-	
+
 	for (auto itr_ocp = occupied_positions.begin(); itr_ocp != occupied_positions.end(); ++itr_ocp)
 	{
 		std::list<std::vector<int>> points_to_del;
 		if (my_figure->get_type() == "R" || my_figure->get_type() == "Q" || my_figure->get_type() == "B" || my_figure->get_type() == "P") // jesli królowa, goniec lub wieża dodaje pozycje do usunięcia za zablokowanym polem
 		{
 			std::list<std::vector<int>> points_behind = get_positions_behind(my_figure->get_position(), *itr_ocp);
-			
+
 			points_to_del.insert(points_to_del.end(), points_behind.begin(), points_behind.end());
 		}
-		
+
 		int blc_x = (*itr_ocp)[0];
 		int blc_y = (*itr_ocp)[1];
 		if (my_figure->get_color() == (board[blc_x][blc_y])->get_color() || my_figure->get_type() == "P")
@@ -104,14 +115,16 @@ std::list<std::vector<int>> Board::get_free_positions_for_figure(Figure* my_figu
 		{
 			auto itr_pos = std::find(possible_pos.begin(), possible_pos.end(), *itr_del);
 			if (itr_pos != possible_pos.end())
-			{possible_pos.erase(itr_pos);}
+			{
+				possible_pos.erase(itr_pos);
+			}
 		}
 	}
 
 	if (my_figure->get_type() == "P") // bicie piona
 	{
-		auto strikes = this->get_strike_positions_for_pawn(my_figure);		
-		for (auto itr = strikes.begin(); itr!= strikes.end(); ++itr)
+		auto strikes = this->get_strike_positions_for_pawn(my_figure);
+		for (auto itr = strikes.begin(); itr != strikes.end(); ++itr)
 		{
 			int x = (*itr)[0];
 			int y = (*itr)[1];
@@ -236,7 +249,7 @@ std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> const& 
 	{
 		blc_x++;
 		blc_y--;
-		while (blc_x <= 7 && blc_y >=0)
+		while (blc_x <= 7 && blc_y >= 0)
 		{
 			std::vector<int> point = { blc_x, blc_y };
 			positions_behind.push_back(point);
@@ -283,6 +296,6 @@ std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> const& 
 			blc_y++;
 		}
 	}
-	return positions_behind; 
+	return positions_behind;
 }
 

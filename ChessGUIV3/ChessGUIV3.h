@@ -30,12 +30,14 @@ public:
     ChessGUIV3(QWidget* parent = Q_NULLPTR);
     void setup_figures();
 
-   
+
 private:
+    int moves_counter = 0;
     Ui::ChessGUIV3Class ui;
     std::vector<std::vector <int>> moves_list;
     std::array<std::array <QPushButton*, 8>, 8> fields;
     Game game;
+    Game replay_game;
     Figure* clicked_figure = nullptr;
     QIcon choose_figure(std::string figure_type, int color);
     void show_possible_moves_for_figure(Figure* figure);
@@ -47,4 +49,5 @@ private:
     void connect_all();
     void display_whose_turn();
     void write_record(Figure*, int x, int y);
+    void save_record()const;
 };

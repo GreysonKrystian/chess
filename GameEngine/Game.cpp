@@ -63,17 +63,32 @@ std::vector<Figure*> Game::get_possible_checking_figures()
 		auto checking_figures = get_checking_figures();
 		if (checking_figures.size() == 1)
 		{
-		for (auto iter = checking_figures.begin(); iter != checking_figures.end(); ++iter)
+			for (auto iter = checking_figures.begin(); iter != checking_figures.end(); ++iter)
 			{
 				get_possible_checking_figures.push_back((*iter));
-			}	
+			}
 		}
 		board.swap_board(board_backup.get_board());
 	}
 	return get_possible_checking_figures;
 }
 
+void Game::restart_game()
+{
+	auto my_board = this->get_board().get_board();
+	for (auto itr_x = my_board.begin(); itr_x != my_board.end(); ++itr_x)
+	{
+		for (auto itr_y = (*itr_x).begin(); itr_y != (*itr_x).end(); ++itr_y)
+		{
+			delete* itr_y;
+		}
+	}
 
+	board.clear_board();
+	player_black.clear_player();
+	player_white.clear_player();
+	create_figures();
+}
 
 void Game::make_move(Figure* current_figure, int new_x, int new_y)
 {
@@ -91,7 +106,7 @@ void Game::make_move(Figure* current_figure, int new_x, int new_y)
 
 void Game::capture_figure(int x, int y)
 {
- 	Figure* captured = board.get_figure(x, y);
+	Figure* captured = board.get_figure(x, y);
 	if (captured->get_color() == 0)//czarne
 	{
 		player_black.del_figure(captured);
@@ -144,13 +159,13 @@ std::list<Figure*> Game::get_checking_figures() const
 	std::list<Figure*> checking_figures;
 
 	std::vector<int> king_pos = cur_player.get_king()->get_position();
-	
+
 	auto enemy_figures = ene_player.get_player_figures();
 	for (auto itr_fig = enemy_figures.begin(); itr_fig != enemy_figures.end(); ++itr_fig)
 	{
 		std::list<std::vector<int>> figure_move_positions = board.get_free_positions_for_figure(*itr_fig);
 		auto itr_to_add = std::find(figure_move_positions.begin(), figure_move_positions.end(), king_pos);
-		if(itr_to_add != figure_move_positions.end())
+		if (itr_to_add != figure_move_positions.end())
 		{
 			checking_figures.push_back(*itr_fig);
 		}
@@ -248,7 +263,7 @@ std::list<std::vector<int>> Game::get_allowed_moves() const //zwraca możliwe ru
 	std::vector<int> king_pos = (get_player().get_king())->get_position(); // król szachowany
 	std::list<std::vector<int>> allowed_moves = {};
 
-	if(checking_figures.size() == 1)
+	if (checking_figures.size() == 1)
 	{
 		std::vector<int> checking_pos = (*(checking_figures.begin()))->get_position();
 		auto positions_between = get_positions_beetween(checking_pos, king_pos);
@@ -267,22 +282,22 @@ std::list<std::vector<int>> Game::restrict_king_positions() //zrwaca listę pól
 
 	Figure* king = checked_player.get_king();
 	std::list<std::vector<int>> king_free_positions = board.get_free_positions_for_figure(king);
-	
+
 	std::list<Figure*> enemy_figures = enem_player.get_player_figures();
-	
+
 	for (auto itr = enemy_figures.begin(); itr != enemy_figures.end(); ++itr) // usuwa pozycje na któr może się ruszyć król, gdzy przeciwna figura ma bicie na to pole
 	{
 		std::list<std::vector<int>> attacking_positions;
 		if ((*itr)->get_type() == "P")
-			 attacking_positions = board.get_strike_positions_for_pawn(*itr);
+			attacking_positions = board.get_strike_positions_for_pawn(*itr);
 		else
-			 attacking_positions = board.get_free_positions_for_figure(*itr);
+			attacking_positions = board.get_free_positions_for_figure(*itr);
 		for (auto itr_attack = attacking_positions.begin(); itr_attack != attacking_positions.end(); ++itr_attack)
 		{
 			auto itr_del = std::find(king_free_positions.begin(), king_free_positions.end(), *itr_attack);
 			if (itr_del != king_free_positions.end())
 			{
-			king_free_positions.remove(*itr_del);
+				king_free_positions.remove(*itr_del);
 			}
 		}
 	}
@@ -296,7 +311,7 @@ std::list<std::vector<int>> Game::restrict_king_positions() //zrwaca listę pól
 		for (auto itr_attack = attacking_positions.begin(); itr_attack != attacking_positions.end(); ++itr_attack)
 		{
 			auto itr_del = std::find(king_free_positions.begin(), king_free_positions.end(), *itr_attack);
-			
+
 			if (itr_del != king_free_positions.end())
 			{
 				king_free_positions.remove(*itr_del);
@@ -315,7 +330,7 @@ std::list<std::vector<int>> Game::restrict_king_positions() //zrwaca listę pól
 	{
 		auto temp_board_3 = board;
 		temp_board_3.move_figure(king, (*itr)[0], (*itr)[1]);
-		
+
 		board.swap_board(temp_board_3.get_board());
 
 		if (size(get_checking_figures()) >= 1)
@@ -325,7 +340,7 @@ std::list<std::vector<int>> Game::restrict_king_positions() //zrwaca listę pól
 				final_positions.remove(*itr);
 			}
 		}
-	}	
+	}
 	board.move_figure(king, backup_kin_x, backup_kin_y);
 	if (backup_first_move_status == true)
 	{
@@ -358,10 +373,10 @@ void Game::create_figures()
 	Figure* pawn_b_8 = new Pawn(0, 7, 1);
 	std::list <Figure*> black{ bishop_l_b, bishop_r_b, rook_l_b, rook_r_b, knight_l_b, knight_r_b, king_b, queen_b,
 	pawn_b_1, pawn_b_2, pawn_b_3, pawn_b_4, pawn_b_5, pawn_b_6, pawn_b_7, pawn_b_8 };
-	
+
 	board.set_starting_postions(black);
 	player_black.set_player_figures(black);
-	
+
 	//Biale
 	Figure* bishop_l_w = new Bishop(1, 2, 7);
 	Figure* bishop_r_w = new Bishop(1, 5, 7);
@@ -381,7 +396,7 @@ void Game::create_figures()
 	Figure* pawn_w_8 = new Pawn(1, 7, 6);
 	std::list < Figure*> white{ bishop_l_w, bishop_r_w, rook_l_w, rook_r_w, knight_l_w, knight_r_w, king_w, queen_w,
 	pawn_w_1, pawn_w_2, pawn_w_3, pawn_w_4, pawn_w_5, pawn_w_6, pawn_w_7, pawn_w_8 };
-	
+
 	board.set_starting_postions(white);
 	player_white.set_player_figures(white);
 }
@@ -423,7 +438,7 @@ std::list<std::vector<int>> Game::get_castling_positions() const
 		pos_y = 7;
 	}
 	std::list<std::vector<int>> castling_positions;
-	if(get_player().get_king()->get_first_move() == true)
+	if (get_player().get_king()->get_first_move() == true)
 	{
 		if ((castling_left_conditions(pos_x, pos_y) == true) && (board.get_figure(pos_x - 1, pos_y) == nullptr) && (board.get_figure(pos_x - 2, pos_y) == nullptr)
 			&& board.get_figure(pos_x - 3, pos_y) == nullptr)
@@ -495,7 +510,7 @@ std::vector<int> Game::do_castling(int new_x, int new_y)
 	{
 		king = player_black.get_king();
 	}
-	
+
 	if (king->get_position()[0] == new_x + 2)
 	{
 		rook_coords.push_back(0);
@@ -633,7 +648,7 @@ std::string Game::get_record(Figure* my_figure, int new_x, int new_y) const
 		text += "[B]: ";
 	else
 		text += "[C]: ";
-	
+
 	text += my_figure->get_type();
 	text += " ";
 	text += convert_x_coordinate(my_figure->get_position()[0]);
@@ -737,4 +752,9 @@ void Player::del_figure(Figure* fig_to_del)
 void Player::replace_figure(Figure* fig_to_add, Figure* current_figure)
 {
 	std::replace(player_figures.begin(), player_figures.end(), current_figure, fig_to_add);
+}
+
+void Player::clear_player()
+{
+	player_figures.clear();
 }

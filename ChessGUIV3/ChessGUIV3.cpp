@@ -1,9 +1,10 @@
 #include "ChessGUIV3.h"
 #include <QMovie>
 #include <Windows.h>
+#include <QFileDialog>
 
 
-ChessGUIV3::ChessGUIV3(QWidget *parent)
+ChessGUIV3::ChessGUIV3(QWidget* parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
@@ -39,40 +40,52 @@ ChessGUIV3::ChessGUIV3(QWidget *parent)
     BKing.addPixmap(b_king);
     BPawn.addPixmap(b_pawn);
     BQueen.addPixmap(b_queen);
-    
+
     /*QPixmap mateusz("om.png");
     mateusz = mateusz.scaled(ui.logo->size(), Qt::KeepAspectRatio);
     ui.logo->setPixmap(mateusz);*/
 
-   QMovie* mateusz = new QMovie("3d1.gif");
-   //mateusz = mateusz.scaled(ui.logo->size(), Qt::KeepAspectRatio);
-   ui.logo->setMovie(mateusz);
-   mateusz->start();
+    QMovie* mateusz = new QMovie("3d1.gif");
+    //mateusz = mateusz.scaled(ui.logo->size(), Qt::KeepAspectRatio);
+    ui.logo->setMovie(mateusz);
+    mateusz->start();
 
     QPixmap fight("fight.png");
     //fight = fight.scaled(ui.playbutton->size(), Qt::KeepAspectRatio);
     //ui.playbutton->setIconSize(ui.playbutton->size());
     ui.playbutton->setIcon(fight);
 
+    QPixmap computer_game("c_vs_p.jpg");
+    //fight = fight.scaled(ui.playbutton->size(), Qt::KeepAspectRatio);
+    //ui.playbutton->setIconSize(ui.playbutton->size());
+    ui.computerGameButton->setIcon(computer_game);
+
+    QPixmap player_game("p_vs_p.jpg");
+    //fight = fight.scaled(ui.playbutton->size(), Qt::KeepAspectRatio);
+    //ui.playbutton->setIconSize(ui.playbutton->size());
+    ui.playerGameButton->setIcon(player_game);
+
+    ui.nextMoveButton->hide();
 
     //ui.playbutton->setEnabled(false);
-    connect(ui.playbutton, &QPushButton::clicked, this, [=]() {ui.stackedWidget->setCurrentIndex(0); });
-    
+    connect(ui.playbutton, &QPushButton::clicked, this, [=]() {ui.stackedWidget->setCurrentIndex(3); });
+    connect(ui.playerGameButton, &QPushButton::clicked, this, [=]() {ui.stackedWidget->setCurrentIndex(0); });
+    connect(ui.saveButton, &QPushButton::clicked, this, [=]() {save_record(); });
+    connect(ui.exitButton, &QPushButton::clicked, this, [=]() {this->close(); });
+    connect(ui.exitButton2, &QPushButton::clicked, this, [=]() {this->close(); });
+    connect(ui.traceGame, &QPushButton::clicked, this, [=]() { ui.stackedWidget->setCurrentIndex(0); ui.nextMoveButton->show(); game.restart_game(); setup_figures(); });
+    connect(ui.nextMoveButton, &QPushButton::clicked, this, [=]() {show_match_history(); });
+
+    setup_figures();
+
+
     connect_all();
     display_whose_turn();
     ui.records->clear();
     ui.records->insertPlainText("Nowa Partia");
     ui.records->insertPlainText("\n");
-    connect(ui.exitButton, &QPushButton::clicked, this, [=]()
-        {
-            this->close();
-        });
-    connect(ui.traceGame, &QPushButton::clicked, this, [=]()
-        {
-            ui.stackedWidget->setCurrentIndex(0);
-            show_match_history();
-        });
 }
+
 
 QIcon ChessGUIV3::choose_figure(std::string figure_type, int color)
 {
@@ -115,12 +128,20 @@ void ChessGUIV3::setup_figures() // dodaje ikony poczatkowe
     {
         for (int j = 0; j < 8; j++)
         {
-            if (game.get_board().get_figure(i,j) != nullptr)
+            fields[i][j]->setIcon(QIcon());
+        }
+    }
+
+    for (int i = 0; i < 8; i++) // mozna to ogarniczyc tylko do 4 rzedow
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (game.get_board().get_figure(i, j) != nullptr)
             {
                 Figure* figure = game.get_board().get_figure(i, j);
                 fields[i][j]->setIcon(choose_figure(figure->get_type(), figure->get_color()));
             }
-               
+
         }
     }
 }
@@ -131,9 +152,9 @@ void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
     {
         hide_possible_moves_for_figure(clicked_figure); // usuniêcie podœwietlenia poprzedniej figury
     }
-    
+
     auto pos = game.get_final_moves_for_figure(figure);
-    
+
     if (figure->get_type() == "K" && game.get_checking_figures().size() == 0)
     {
         auto castling = game.get_castling_positions();
@@ -144,7 +165,7 @@ void ChessGUIV3::show_possible_moves_for_figure(Figure* figure)
         auto cur_pos = *it;
         fields[cur_pos[0]][cur_pos[1]]->setStyleSheet("background-color: rgb(44, 163, 44); border: 1px solid black");
     }
-    
+
     clicked_figure = figure;
     make_move();
 }
@@ -155,7 +176,7 @@ void ChessGUIV3::disconnect_all()
     {
         for (int j = 0; j < 8; j++)
         {
-            fields[i][j]->disconnect();   
+            fields[i][j]->disconnect();
         }
     }
 }
@@ -168,8 +189,8 @@ void ChessGUIV3::connect_all()
         int x = (*itr)->get_position()[0];
         int y = (*itr)->get_position()[1];
         connect(fields[x][y], &QPushButton::clicked, this, [=]()
-        {show_possible_moves_for_figure(game.get_board().get_figure(x, y));
-        });
+            {show_possible_moves_for_figure(game.get_board().get_figure(x, y));
+            });
     }
 }
 
@@ -217,52 +238,61 @@ void ChessGUIV3::make_move()
         int x_clicked = clicked_figure->get_position()[0];
         int y_clicked = clicked_figure->get_position()[1];
         connect(fields[x][y], &QPushButton::clicked, this, [=]()
-                    {fields[x][y]->setIcon(choose_figure(clicked_figure->get_type(), clicked_figure->get_color()));
-                    fields[x_clicked][y_clicked]->setIcon(QIcon());
-                    hide_possible_moves_for_figure(clicked_figure);
-                    moves_list.push_back({ x_clicked, y_clicked, x, y });
-                    if (clicked_figure->get_type() == "K")
-                    {
-                        auto castling_tiles = game.get_castling_positions();
-                        for (auto iter = castling_tiles.begin(); iter != castling_tiles.end(); ++iter)
-                        {
-                            if ((x == (*iter)[0]) && (y == (*iter)[1]))
-                            {
-                                auto rook_coords = game.do_castling(x, y);
-                                fields[rook_coords[2]][rook_coords[3]]->setIcon(choose_figure("R", clicked_figure->get_color()));
-                                fields[rook_coords[0]][rook_coords[1]]->setIcon(QIcon());
-                            }
-                        }
-                    }
-                    write_record(clicked_figure, x, y);
-                    game.make_move(clicked_figure, x, y);
-                    if (clicked_figure->get_type() == "P")
-                    {
-                        if (game.check_promote_pawn(clicked_figure) == true)
-                        {
-                            ui.records->insertPlainText(" (promocja piona)");
-                            clicked_figure = game.get_board().get_figure(x, y);
-                            fields[x][y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
-                        }
-                    }
-                    game.change_turn();
-                    if (game.check_stalemate_condition())
-                    {
-                        ui.display_win->setText("PAT");
-                        ui.stackedWidget->setCurrentIndex(2);
-                    }
-                    else if (game.check_win_condition())
-                    {
-                        if (game.get_current_player())
-                            ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!");
-                        else
-                            ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!!");
-                        ui.stackedWidget->setCurrentIndex(2);
-                    }
-                    display_whose_turn();
-                    disconnect_all();
-                    connect_all();
-                    });
+            {fields[x][y]->setIcon(choose_figure(clicked_figure->get_type(), clicked_figure->get_color()));
+        fields[x_clicked][y_clicked]->setIcon(QIcon());
+        hide_possible_moves_for_figure(clicked_figure);
+        if (clicked_figure->get_type() == "K")
+        {
+            auto castling_tiles = game.get_castling_positions();
+            for (auto iter = castling_tiles.begin(); iter != castling_tiles.end(); ++iter)
+            {
+                if ((x == (*iter)[0]) && (y == (*iter)[1]))
+                {
+                    auto rook_coords = game.do_castling(x, y);
+                    fields[rook_coords[2]][rook_coords[3]]->setIcon(choose_figure("R", clicked_figure->get_color()));
+                    fields[rook_coords[0]][rook_coords[1]]->setIcon(QIcon());
+                }
+            }
+        }
+        write_record(clicked_figure, x, y);
+        game.make_move(clicked_figure, x, y);
+        moves_list.push_back({ x_clicked, y_clicked, x, y });
+
+        if (clicked_figure->get_type() == "P")
+        {
+            if (game.check_promote_pawn(clicked_figure) == true)
+            {
+                ui.records->insertPlainText(" (promocja piona)");
+                clicked_figure = game.get_board().get_figure(x, y);
+                fields[x][y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
+            }
+        }
+        game.change_turn();
+        if (game.check_stalemate_condition())
+        {
+            ui.display_win->setText("PAT");
+            ui.stackedWidget->setCurrentIndex(3);
+        }
+        else if (game.check_win_condition())
+        {
+            if (game.get_current_player())
+            {
+                ui.display_win->setText("CZARNE WYGRYWAJA !!!!!!!");
+                ui.records->insertPlainText("CZARNE WYGRYWAJA !!!!!!!");
+            }
+            else
+            {
+                ui.display_win->setText("BIALE WYGRYWAJA !!!!!!!!");
+                ui.records->insertPlainText("BIALE WYGRYWAJA !!!!!!!!");
+            }
+            ui.stackedWidget->setCurrentIndex(2);
+
+
+        }
+        display_whose_turn();
+        disconnect_all();
+        connect_all();
+            });
     }
 
 }
@@ -302,15 +332,15 @@ void ChessGUIV3::computer_move(int current_x, int current_y, int move_to_x, int 
 
 void ChessGUIV3::show_match_history()
 {
-    Game new_game;
-    game = new_game;
-    setup_figures();
-    for (unsigned int i = 0; i < moves_list.size(); i++)
+    if (moves_counter < (moves_list.size()))
     {
-        Sleep(100);
-        computer_move(moves_list[i][0], moves_list[i][1], moves_list[i][2], moves_list[i][3]);
+        computer_move(moves_list[moves_counter][0], moves_list[moves_counter][1], moves_list[moves_counter][2], moves_list[moves_counter][3]);
+        moves_counter++;
+        if (moves_counter == moves_list.size())
+            ui.nextMoveButton->setEnabled(false);
     }
 }
+
 
 void ChessGUIV3::display_whose_turn()
 {
@@ -324,9 +354,21 @@ void ChessGUIV3::display_whose_turn()
     }
 }
 
+
 void ChessGUIV3::write_record(Figure* clicked_figure, int new_x, int new_y)
 {
     auto text = game.get_record(clicked_figure, new_x, new_y);
-
     ui.records->insertPlainText(text.c_str());
+}
+
+void ChessGUIV3::save_record() const
+{
+    QString file_name = QFileDialog::getSaveFileName(nullptr, "Zapisz przebeig rozgrywki", ".", "Text files (*.txt)");
+
+    QFile outfile;
+    outfile.setFileName(file_name);
+    outfile.open(QIODevice::Append);
+    QTextStream out(&outfile);
+    out << ui.records->toPlainText() << endl;
+    ui.saveButton->setEnabled(false);
 }
