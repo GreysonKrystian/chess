@@ -74,7 +74,7 @@ ChessGUIV3::ChessGUIV3(QWidget* parent)
     connect(ui.saveButton, &QPushButton::clicked, this, [=]() {save_record(); });
     connect(ui.exitButton, &QPushButton::clicked, this, [=]() {this->close(); });
     connect(ui.exitButton2, &QPushButton::clicked, this, [=]() {this->close(); });
-    connect(ui.traceGame, &QPushButton::clicked, this, [=]() { ui.stackedWidget->setCurrentIndex(0); ui.nextMoveButton->show(); game.restart_game(); setup_figures(); ui.records->clear(); });
+    connect(ui.traceGame, &QPushButton::clicked, this, [=]() { ui.stackedWidget->setCurrentIndex(0); ui.nextMoveButton->show(); game.restart_game(); setup_figures(); ui.records->clear(); playing_with_computer = false; });
     connect(ui.nextMoveButton, &QPushButton::clicked, this, [=]() {show_match_history(); });
     
     setup_figures();
@@ -83,8 +83,7 @@ ChessGUIV3::ChessGUIV3(QWidget* parent)
     connect_all();
     display_whose_turn();
     ui.records->clear();
-    ui.records->insertPlainText("Nowa Partia");
-    ui.records->insertPlainText("\n");
+    ui.records->insertPlainText("Nowa Partia\n");
 }
 
 
@@ -339,7 +338,13 @@ void ChessGUIV3::computer_move(int current_x, int current_y, int move_to_x, int 
     }
 
     game.make_move(clicked_figure, move_to_x, move_to_y);
+    
+    if (playing_with_computer)
+    {
+        moves_list.push_back({ current_x, current_y, move_to_x, move_to_y });
+    }
     game.change_turn();
+
     if (game.check_stalemate_condition()) // zrobic z tego funkcje
     {
         ui.display_win->setText("PAT");
@@ -358,8 +363,6 @@ void ChessGUIV3::computer_move(int current_x, int current_y, int move_to_x, int 
             ui.records->insertPlainText("BIALE WYGRYWAJA !!!!!!!!");
         }
         ui.stackedWidget->setCurrentIndex(2);
-        
-
     }
     else
     {
