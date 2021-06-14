@@ -3482,7 +3482,7 @@
          </font>
         </property>
         <property name="text">
-         <string>WYBIERZ rodzaj rozgrywki</string>
+         <string>Wybierz rodzaj rozgrywki</string>
         </property>
         <property name="textFormat">
          <enum>Qt::RichText</enum>

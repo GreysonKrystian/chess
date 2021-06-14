@@ -24,7 +24,7 @@ class Game
 private:
 	Player player_white;
 	Player player_black;
-	Board board; // było public
+	Board board;
 	bool is_white_turn;
 	std::list<std::vector<int>> restrict_king_positions();
 	bool castling_left_conditions(int pos_x, int pos_y) const;

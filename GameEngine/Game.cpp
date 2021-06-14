@@ -115,7 +115,6 @@ void Game::capture_figure(int x, int y)
 	{
 		player_white.del_figure(captured);
 	}
-	//delete captured;
 }
 
 bool Game::check_stalemate_condition()
@@ -138,7 +137,6 @@ bool Game::check_stalemate_condition()
 
 bool Game::check_win_condition()
 {
-	//auto king_positions = get_final_moves_for_figure(get_player().get_king());
 	auto enemy_figures = get_player().get_player_figures();
 	for (auto itr_fig = enemy_figures.begin(); itr_fig != enemy_figures.end(); ++itr_fig)
 	{
@@ -180,10 +178,6 @@ std::list<std::vector<int>> Game::get_final_moves_for_figure(Figure* my_figure)
 	auto figure_positions = board.get_free_positions_for_figure(my_figure);
 	std::list<std::vector<int>> final_positions = {};
 
-
-
-
-
 	if (checking_figures.size() == 0)
 	{
 		auto possible_checking_figures = get_possible_checking_figures();
@@ -218,9 +212,6 @@ std::list<std::vector<int>> Game::get_final_moves_for_figure(Figure* my_figure)
 			}
 		}
 	}
-
-
-
 
 
 	if (my_figure->get_type() != "K")
