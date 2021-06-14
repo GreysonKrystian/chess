@@ -319,6 +319,9 @@ void ChessGUIV3::computer_move(int current_x, int current_y, int move_to_x, int 
         }
     }
     write_record(clicked_figure, move_to_x, move_to_y);
+
+
+    game.make_move(clicked_figure, move_to_x, move_to_y);
     if (clicked_figure->get_type() == "P")
     {
         if (game.check_promote_pawn(clicked_figure) == true)
@@ -328,8 +331,6 @@ void ChessGUIV3::computer_move(int current_x, int current_y, int move_to_x, int 
             fields[move_to_x][move_to_y]->setIcon(choose_figure("Q", clicked_figure->get_color()));
         }
     }
-
-    game.make_move(clicked_figure, move_to_x, move_to_y);
     
     if (playing_with_computer)
     {
