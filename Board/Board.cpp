@@ -298,4 +298,3 @@ std::list<std::vector<int>> Board::get_positions_behind(std::vector<int> const& 
 	}
 	return positions_behind;
 }
-
