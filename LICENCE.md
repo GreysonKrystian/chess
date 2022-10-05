@@ -2,6 +2,7 @@ MIT License
 
 Copyright (c) 2022 Krystian Grela
 Copyright (c) 2022 Adam Wróblewski
+Copyright (c) 2022 Aleksander Woś
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
