@@ -83,5 +83,5 @@ Main clases of project:
 [(Back to top)](#table-of-contents)
 
 
-The MIT License (MIT) 2022 - [Krystian Grela](https://github.com/GreysonKrystian/), Aleksander Woś, Adam Wróblewski. Please have a look at the [LICENSE.md](LICENSE.md) for more details.
+The MIT License (MIT) 2022 - [Krystian Grela](https://github.com/GreysonKrystian/), Aleksander Woś, Adam Wróblewski. Please have a look at the [LICENCE.md](LICENSE.md) for more details.
 We are NOT authors of gifs and chess figures images which are included in this project. 
